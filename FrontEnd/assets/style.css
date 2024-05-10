@@ -133,25 +133,29 @@ li:hover {
 	padding-bottom: 23px;
 }
 
-input[type="button"] /*style buttons category*/
-{
+/* input[type="button"] style buttons category */
+#filter-buttons a {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: #1D6154;
 	background-color: white;
+	text-decoration: none;
 
+	display:flex;
+	align-items: center;
 	/* padding-top: 5px;
 	padding-right: 5px;
 	padding-bottom: 5px;
 	padding-left: 5px; */
-	padding: 10px 15px 10px 15px;
+	padding: 0px 15px 0px 15px;
 	height: 37px;
 
 	text-align: center;
 	border-radius: 60px ;
 	border: 1px solid #1D6154;
 }
-input[type="button"]:hover {
+/* input[type="button"]:hover  */
+#filter-buttons a:hover {
 	color: white;
 	background-color: #1D6154;
 	cursor: pointer;
