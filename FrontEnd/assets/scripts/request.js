@@ -9,7 +9,7 @@ const fetchCategories = async () => {
 };
 
 // fetch('http://localhost:5678/api/categories')
-//   .then(response => response.json())
+//     .then(response => response.json())
 
 // const reponse = await fetch("http://localhost:5678/api/categories");
 // const fetchCategories = await reponse.json();
@@ -18,3 +18,4 @@ const fetchCategories = async () => {
 //     const response = await fetch('http://localhost:5678/api/categories')
 //     return await response.json();
 // }
+
