@@ -11,74 +11,63 @@ const fetchCategories = async () => {
 };
 
 const displayWorks = (idCategorie = 0) => {
-
     let filteredWorks;
-   
-    if(idCategorie > 0)  {
+
+    if (idCategorie > 0) {
         filteredWorks = projets.filter((projet) => {
             return projet.categoryId == idCategorie;
         });
-    } 
-    else {
+    } else {
         filteredWorks = projets;
-    }  
-
+    }
     // vide la gallery
-    gallery.innerHTML="";
+    gallery.innerHTML = "";
 
     filteredWorks.forEach(projet => {
-        // for (let i = 0; i < projets.length; i++) {
-        //     const projet = projets[i];
-        //     console.log(projets)
-
         // Création des élément galerie principale
         const figure = document.createElement('figure');
-        figure.dataset.id = projet.id; // Ajout de l'identifiant du projet à l'attribut data-id
+        figure.dataset.id = projet.id;
 
         const img = document.createElement('img');
-        img.src = projet.imageUrl; // Utilisation de la propriété imageUrl de l'objet projet
-        img.alt = projet.title; // Utilisation de la propriété title de l'objet projet
+        img.src = projet.imageUrl;
+        img.alt = projet.title;
 
         const figcaption = document.createElement('figcaption');
-        figcaption.textContent = projet.title; // Utilisation de la propriété title de l'objet projet
+        figcaption.textContent = projet.title;
 
-        // Ajout des éléments dans la galerie principal
         figure.appendChild(img);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
-
     });
 }
 
 //Création du bouton "Tous"
 const createBtnAll = () => {
-    const btnAll = document.createElement("input");
-    btnAll.type = "button";
+    const btnAll = document.createElement("button");
     btnAll.classList.add("filters");
-    btnAll.value = "Tous";
-    // btnAll.innerHTML = "Tous";
+    btnAll.innerHTML = "Tous";
     btnAll.dataset.category = 0;
+
     btnAll.addEventListener('click', (event) => {
-        
         displayWorks();
+        btnSelected(event);
+        // btnSelected();
     });
-    
+
     categoryButtonsContainer.appendChild(btnAll);//Ajout du bouton "Tous" dans le parent
 };
 
 //Création des boutons de chaque catégorie
 const createCategory = (category) => {
-    const button = document.createElement("input");
-    // button.setAttribute("type","button");
-    button.type = "button";
+    const button = document.createElement("button");
     button.classList.add("filters");
-    button.value = category.name;
-    // button.innerHTML = category.name;
+    button.innerHTML = category.name;
     button.dataset.category = category.id;
 
     button.addEventListener('click', () => {
-        
         displayWorks(category.id);
+        btnSelected(event);
+        // btnSelected();
     });
 
     // Rattachement du bouton créé au conteneur des boutons de catégories ('filter-buttons')
@@ -87,20 +76,26 @@ const createCategory = (category) => {
 
 // Créer tous les boutons de toutes les catégories (<a href class>category.name</a>)
 const displayCategories = (categories) => {
-
+    // Réinitialise le conteneur des boutons de catégorie
+    // categoryButtonsContainer.innerHTML = "";
     createBtnAll();
-
     categories.forEach(category => {
-
         createCategory(category);
-        // const button = document.createElement("a");
-        // // button.setAttribute("href","#");
-        // button.href = "#";
-        // button.classList.add("filters");
-        // button.innerHTML = category.name;
-        // button.dataset.category = category.id;
-
-        // // Rattachement du bouton créé (<a>) au conteneur des boutons de catégories ('filter-buttons')
-        // categoryButtonsContainer.appendChild(button);
     })
+};
+// Fonction pour ajouter la classe 'btn_selected' au bouton cliqué
+const btnSelected = (event) => {
+    // Sélectionne tous les boutons de filtre
+    const buttons = document.querySelectorAll(".filters");
+
+    // Parcours de tous les boutons avec une boucle for
+    for (let i = 0; i < buttons.length; i++) {
+        const button = buttons[i];
+        // Ajoute la classe 'btn_selected' au bouton cliqué
+        if (button === event.target) {
+            button.classList.add("btn_selected");
+        } else {
+            button.classList.remove("btn_selected");
+        }
+    }
 };
