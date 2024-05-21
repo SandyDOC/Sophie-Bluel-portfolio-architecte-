@@ -51,7 +51,6 @@ const createBtnAll = () => {
     btnAll.addEventListener('click', (event) => {
         displayWorks();
         btnSelected(event);
-        // btnSelected();
     });
 
     categoryButtonsContainer.appendChild(btnAll);//Ajout du bouton "Tous" dans le parent
@@ -67,7 +66,6 @@ const createCategory = (category) => {
     button.addEventListener('click', () => {
         displayWorks(category.id);
         btnSelected(event);
-        // btnSelected();
     });
 
     // Rattachement du bouton créé au conteneur des boutons de catégories ('filter-buttons')
@@ -85,13 +83,10 @@ const displayCategories = (categories) => {
 };
 // Fonction pour ajouter la classe 'btn_selected' au bouton cliqué
 const btnSelected = (event) => {
-    // Sélectionne tous les boutons de filtre
     const buttons = document.querySelectorAll(".filters");
 
-    // Parcours de tous les boutons avec une boucle for
     for (let i = 0; i < buttons.length; i++) {
         const button = buttons[i];
-        // Ajoute la classe 'btn_selected' au bouton cliqué
         if (button === event.target) {
             button.classList.add("btn_selected");
         } else {
