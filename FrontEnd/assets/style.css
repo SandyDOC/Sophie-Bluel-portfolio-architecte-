@@ -180,7 +180,7 @@ nav li {
   font-size: 1.2em;
 }
 
-/*Links li nav*/
+/* Links li nav */
 li a {
   text-decoration: none;
   color: black;
@@ -212,11 +212,15 @@ li a:hover {
 #introduction p {
   margin-bottom: 0.5em;
 }
+/* Portfolio section */
+#portfolio {
+  position: relative;
+}
 #portfolio h2 {
   text-align: center;
   margin-bottom: 1em;
 }
-/**** Filter buttons ****/
+/* filter buttons */
 #filter-buttons {
   display: flex;
   justify-content: center;
@@ -224,7 +228,6 @@ li a:hover {
   padding-bottom: 23px;
 }
 
-/* input[type="button"]  */
 #filter-buttons button.filters {
   font-family: "Syne";
   font-weight: 700;
@@ -234,10 +237,6 @@ li a:hover {
 
   display: flex;
   align-items: center;
-  /* padding-top: 5px;
-	padding-right: 5px;
-	padding-bottom: 5px;
-	padding-left: 5px; */
   padding: 0px 15px 0px 15px;
   height: 37px;
 
@@ -254,7 +253,7 @@ li a:hover {
   color: #fffef8;
   background-color: #1d6154;
 }
-
+/* gallery */
 .gallery {
   width: 100%;
   display: grid;
@@ -262,10 +261,10 @@ li a:hover {
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 }
-
 .gallery img {
   width: 100%;
 }
+/* contact (form) */
 #contact {
   width: 50%;
   margin: auto;
@@ -309,49 +308,9 @@ input[type="submit"] {
   height: 50px;
 }
 input[type="submit"]:hover {
-	background-color: #0E2F28;
-	cursor: pointer;
+  background-color: #0e2f28;
+  cursor: pointer;
 }
-
-/* Login */
-.login {
-    width: 50%;
-    margin: auto;
-    margin-bottom: 200px;
-}
-
-.login > * {
-	color: #3D3D3D;
-    text-align: center;
-}
-
-.login h2 {
-    margin-bottom: 20px;
-	color: #1d6154;
-}
-
-.login form {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-	text-align: justify;
-}
-#loginForm label {
-	margin: 2em 0 1em 0;
-}
-.login input {
-    height: 50px;
-    font-size: 1.2em;
-    border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-.login #mdpOublie {
-    color: #3D3D3D;
-	text-align: center;
-}
-/* .invalid-input {
-	border: 1px solid red;
-} */
 
 /* Footer */
 footer {
@@ -361,4 +320,59 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
+}
+
+/* Login */
+.login {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 200px;
+}
+.login > * {
+  color: #3d3d3d;
+  text-align: center;
+}
+.log {
+  font-weight: bold;
+}
+.login h2 {
+  margin-bottom: 20px;
+  color: #1d6154;
+}
+.login form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+}
+#loginForm label {
+  margin: 2em 0 1em 0;
+}
+.login input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.login #mdpOublie {
+  color: #3d3d3d;
+  text-align: center;
+}
+
+/* Modal modifier  */
+.edit-modif {
+  color: #000;
+  display: flex;
+  margin-left: 10px;
+  gap: 10px;
+  position: absolute;
+  top: 9px;
+  left: calc(50% + 111px);
+}
+.display-none {
+  display: none !important;
+}
+.error-message {
+  color: red;
+  font-size: 0.8em;
 }

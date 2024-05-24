@@ -1,9 +1,7 @@
 let projets = [];
 
-// Sélection de l'élément DOM pour les liens de filtre
-const categoryButtonsContainer = document.getElementById('filter-buttons');
-
 // Sélection des éléments du DOM
+const categoryButtonsContainer = document.getElementById('filter-buttons');
 const gallery = document.querySelector('.gallery');
 
 // Fetch pour récupérer les travaux de l'API

@@ -10,11 +10,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
 	<meta name="description" content="">
+	<!-- kit fontawesome -->
+	<script src="https://kit.fontawesome.com/8f2991717e.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 
-	
+
 	<script src="./assets/scripts/works.js" defer></script>
-	
+
 	<script src="./assets/scripts/index.js" defer></script>
 
 	<script src="./assets/scripts/script.js" defer></script>
@@ -27,20 +29,30 @@
 			<ul>
 				<li><a href="#portfolio">projets</a></li>
 				<li><a href="#contact">contact</a></li>
-				<li><a href="login.html">login</a></li>
+				<li><a class="log" href="login.html">login</a></li>
 
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
+		<!-- <a href="#modal">Lien vers modal</a> -->
+		<!-- Modal -->
+		<!-- <aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal">
+			<div class="modal-wrapper">
+					<i class="fa-solid fa-xmark fa-lg"></i>
+					<h3 class="titleModal">Gallerie photo</h3>
+			</div>
+		</aside> -->
+
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
-				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
+					livraison
 					finale du chantier.</p>
 				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
 					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
@@ -51,6 +63,12 @@
 		</section>
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
+			<!-- Modal modifier -->
+			<a class="edit-modif display-none">
+				<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+				<span>modifier</span>
+			</a>
+			<!--  -->
 
 			<div id="filter-buttons"></div>
 
