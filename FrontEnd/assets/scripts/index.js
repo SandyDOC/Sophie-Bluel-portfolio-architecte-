@@ -1,1 +1,0 @@
-//logout - au click sur loclout  appeler la function logout de user.js

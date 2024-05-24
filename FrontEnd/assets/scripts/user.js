@@ -88,7 +88,7 @@ function checkDataSubmit(email, password) {
         emailValid = true;
         document.getElementById("emailError").textContent = "";
     } else {
-        document.getElementById("emailError").textContent = "Email invalide";
+        document.getElementById("emailError").textContent = "Email invalide. Vous devez saisir un email avec un @.";
     }
 
     // Supprime les espaces en début et fin de chaîne du mot de passe
@@ -99,7 +99,7 @@ function checkDataSubmit(email, password) {
         passwordValid = true;
         document.getElementById("passwordError").textContent = "";
     } else {
-        document.getElementById("passwordError").textContent = "Mot de passe invalide";
+        document.getElementById("passwordError").textContent = "Veuillez saisir un mot de passe.";
     }
 
     return emailValid && passwordValid;
@@ -172,23 +172,36 @@ function connect() {
             headers: { "Content-Type": "application/json" },
             body: chargeUtile
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erreur de réseau');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Traitement de la réponse de l'API
-                console.log("Réponse de l'API:", data);
-                // Redirection vers index.html après une soumission réussie
-                window.location.href = "index.html";
-            })
-            .catch(error => {
-                console.error("Erreur lors de la soumission du formulaire:", error);
-            });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur de réseau');
+            }
+            
+            return response.json();
+        })
+        .then(data => {
+            // Traitement de la réponse de l'API
+            console.log("Réponse de l'API:", data);
+            // Redirection vers index.html après une soumission réussie
+            window.location.href = "index.html";
+        })
+        .catch(error => {
+
+            console.error("Erreur lors de la soumission du formulaire:", error);
+            afficherErreurConnexion(login);
+        });
     });
 }
+
+function afficherErreurConnexion(login) {
+    const loginDiv = document.getElementById("loginDiv");
+    const spanErreurConnexion = document.createElement("span");
+    spanErreurConnexion.innerHTML = "Email ou le mot de passe invalide.";
+    spanErreurConnexion.classList.add("error-message");
+    loginDiv.insertBefore(spanErreurConnexion, login);
+
+}
+
 
 // Fonction pour vérifier si l'utilisateur est connecté
 function isConnected() {
@@ -214,13 +227,8 @@ function updateUI() {
         filterButtons.hidden = true;
     } else {
         logLink.textContent = "login";
-        editModif.classList.add("display-none");
+        //editModif.classList.add("display-none");
         filterButtons.hidden = false;
     }
 }
 
-// Appeler updateUI pour mettre à jour l'interface utilisateur au chargement de la page
-document.addEventListener("DOMContentLoaded", function () {
-    updateUI();
-    connect();
-});

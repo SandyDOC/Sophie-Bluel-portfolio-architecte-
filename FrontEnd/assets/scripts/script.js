@@ -24,7 +24,11 @@ fetchCategories()
         console.error('Erreur lors de la récupération des données :', error);
     });
 
-
+// Appeler updateUI pour mettre à jour l'interface utilisateur au chargement de la page
+document.addEventListener("DOMContentLoaded", function () {
+    updateUI();
+    
+});
 
 
 
