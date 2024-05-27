@@ -7,20 +7,6 @@
 // //     return await response.json();
 // // };
 
-// Fonction pour récupérer les travaux
-async function fetchWorks() {
-    const response = await fetch('http://localhost:5678/api/works');
-    const respWorks = await response.json();
-    return respWorks;
-}
-
-// Fonction pour récupérer les catégories
-async function fetchCategories() {
-    const response = await fetch('http://localhost:5678/api/categories');
-    const respCategories = await response.json();
-    return respCategories;
-}
-
 // // Fonction pour afficher les travaux filtrés par catégorie
 // // const displayWorks = (idCategorie = 0) => {
 // function displayWorks(idCategorie = 0) {
@@ -171,15 +157,16 @@ function handleFilterButtonClick(event) {
 function displayCategories(categories) {
     // Réinitialise le conteneur des boutons de catégorie
     categoryButtonsContainer.innerHTML = "";
-
+    
     // Création du bouton "Tous"
     const btnAll = document.createElement("button");
     btnAll.classList.add("filters");
+    btnAll.classList.add("btn_selected");
     btnAll.innerHTML = "Tous";
     btnAll.dataset.category = 0;
-    btnAll.addEventListener('click', handleFilterButtonClick);
     categoryButtonsContainer.appendChild(btnAll);
-
+    btnAll.addEventListener('click', handleFilterButtonClick);
+    
     // Création des boutons de chaque catégorie
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
@@ -187,8 +174,8 @@ function displayCategories(categories) {
         button.classList.add("filters");
         button.innerHTML = category.name;
         button.dataset.category = category.id;
-        button.addEventListener('click', handleFilterButtonClick);
         categoryButtonsContainer.appendChild(button);
+        button.addEventListener('click', handleFilterButtonClick);
     }
 }
 
@@ -197,11 +184,11 @@ function btnSelected(event) {
     const buttons = document.querySelectorAll(".filters");
 
     for (let i = 0; i < buttons.length; i++) {
-        const button = buttons[i];
-        if (button === event.target) {
-            button.classList.add("btn_selected");
+        const buttonSelect = buttons[i];
+        if (buttonSelect === event.target) {
+            buttonSelect.classList.add("btn_selected");
         } else {
-            button.classList.remove("btn_selected");
+            buttonSelect.classList.remove("btn_selected");
         }
     }
 }

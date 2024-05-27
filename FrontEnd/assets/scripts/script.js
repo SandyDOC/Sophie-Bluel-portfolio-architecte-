@@ -25,10 +25,10 @@ fetchCategories()
     });
 
 // Appeler updateUI pour mettre à jour l'interface utilisateur au chargement de la page
-document.addEventListener("DOMContentLoaded", function () {
-    updateUI();
+// document.addEventListener("DOMContentLoaded", function () {
+//     updateUI();
     
-});
+// });
 
 
 
