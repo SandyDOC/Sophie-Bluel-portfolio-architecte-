@@ -1,135 +1,193 @@
-// // 3 fonctions : connect, isConnected et disConnect
+// // Sélection des éléments du DOM du formulaire
+// const emailInput = document.getElementById("email");
+// const passwordInput = document.getElementById("password");
+// const loginForm = document.getElementById("loginForm");
+// const logOut = document.getElementById("login-link");
 
-// Fonction pour vérifier l'email et le mot de passe
-function checkDataSubmit(email, password) {
-    let emailValid = false;
-    let passwordValid = false;
-
-    // Vérification de l'email
-    if (email.includes("@")) {
-        emailValid = true;
-        document.getElementById("emailError").textContent = "";
-    } else {
-        document.getElementById("emailError").textContent = "Vous devez saisir un email avec un @";
-    }
-
-    // Supprime les espaces en début et fin de chaîne du mot de passe
-    const trimmedPassword = password.trim();
-    // Vérification du mot de passe
-    if (trimmedPassword !== "" && !password.includes(" ") && trimmedPassword.length >= 6) {
-        passwordValid = true;
-        document.getElementById("passwordError").textContent = "";
-    } else {
-        document.getElementById("passwordError").textContent = "Veuillez saisir un mot de passe de 6 caractères au moins et sans espace";
-    }
-
-    return emailValid && passwordValid;
+// Fonction de création du message d'erreur pour le mot de passe
+function afficherErreurConnexion(loginForm) {
+  const loginDiv = document.getElementById("loginDiv");
+  const spanErreurConnexion = document.createElement("span");
+  spanErreurConnexion.innerHTML = "Email ou mot de passe invalide";
+  spanErreurConnexion.classList.add("error-message");
+  spanErreurConnexion.classList.add("dataLogin");
+  loginDiv.insertBefore(spanErreurConnexion, loginForm);
 }
 
-// Écouteur d'événement pour la soumission du formulaire
+// Fonction pour gérer la connexion
 function connect() {
-    const login = document.getElementById("loginForm");
-    login.addEventListener("submit", function (event) {
-        event.preventDefault();// Empêche le formulaire de soumettre de manière traditionnelle
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-        const email = event.target.querySelector("[name=email]").value;
-        const password = event.target.querySelector("[name=password]").value;
-        // const email = document.getElementById('email').value;
-        // const password = document.getElementById('password').value;
+    // Vérifie les données du formulaire
+    // const isValid = checkDataSubmit(emailValid, passwordValid);
+    // if (!isValid) return;
 
-        // Création de l'objet des données email et password
-        const dataLogin = {
-            email: email,
-            password: password,
-        };
-        // Création de la charge utile au format JSON
-        const chargeUtile = JSON.stringify(dataLogin);
+    const userEmail = emailInput.value;
+    const userPassword = passwordInput.value;
+    const dataLogin = {
+      email: userEmail,
+      password: userPassword,
+    };
 
-        // Appel de la fonction fetch avec toutes les informations
-        // fetchLogin({
-        try {
-            const response = fetch("http://localhost:5678/api/users/login", {
-                // fetch("http://localhost:5678/api/users/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: chargeUtile
-            });
-            if (response.ok) {
-                const result = response.json();
-                // Stocke les données de connexion dans le localStorage
-                localStorage.setItem('dataLogin', chargeUtile);
-                console.log(chargeUtile)
-                // Redirige vers homepage
-                window.location.href = 'index.html';
-            } else if (response.status === 401) {
-                throw new Error('Adresse email ou mot de passe invalide');
-            }
-            else {
-                throw new Error('Erreur lors de la connexion')
-                // Gère les erreurs de connexion, par exemple, afficher un message d'erreur
-                // document.getElementById('passwordError').textContent = 'Email ou mot de passe incorrect.';
-            }
-        } catch (error) {
-            console.error("Erreur lors de la soumission du formulaire:", error);
-            afficherErreurConnexion(login);
+    const chargeUtile = JSON.stringify(dataLogin);
+    /****Envoi de la requête****/
+    fetch("http://localhost:5678/api/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: chargeUtile,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          afficherErreurConnexion(loginForm);
+          emailInput.style.border = "2px solid #FF0000";
+          passwordInput.style.border = "2px solid #FF0000";
+          throw new Error("Le mot de passe ou l'identifiant que vous avez fourni est incorrect.");
         }
-    });
+        return response.json();
+      })
+      .then((data) => {
+        // Stocke le token dans le stockage local et redirige vers la page d'accueil
+        const token = data.token;
+        localStorage.setItem('token', token);
+        window.location.href = 'index.html';
+        // const userId = data.userId;
+        // const userToken = data.token;
+        // window.localStorage.setItem("token", userToken);
+        // window.localStorage.setItem("userId", userId);
+        // window.location.href = "index.html";
+      })
+      .catch((error) => {
+        console.error("Une erreur est survenue : ", error);
+      });
 
-    // .then(response => {
-    // if (response.ok) {
-    //     return response.json();
-    // } else if (response.status === 401) {
-    //     throw new Error (afficherErreurConnexion(login));
-    // } else {
-    //     throw new Error ('Erreur lors de la connexion')
+    // if (isConnected()) {
+    //   window.location.href = "index.html"; 
     // }
-    //     if (!response.ok) {
-    //         throw new Error('Erreur de réseau');
-    //     } else if (response.status === 401) {
-    //         throw new Error('Adresse email ou mot de passe invalide');
-    //     }
-    //     return response.json();
-    // })
-    //         .then(data => {
-    //             // Traitement de la réponse de l'API
-    //             console.log("Réponse de l'API:", data);
+  });
+};
 
-    //             const token = data.token;
-    //             localStorage.setItem('token', token)
-
-    //             // Redirection vers index.html après une soumission réussie
-    //             window.location.href = "index.html";
-    //         })
-    //         .catch(error => {
-    //             console.error("Erreur lors de la soumission du formulaire:", error);
-    //             afficherErreurConnexion(login);
-    //         });
-    // });
+// Fonction pour vérifier si l'utilisateur est connecté
+// export function isConnected() {
+function isConnected() {
+  const token = window.localStorage.getItem("token");
+  // return token !== null && token !== "";
+  if (token !== null && token !== "") {
+    const logOut = document.getElementById("login-link");
+    logOut.addEventListener("click", () => {
+    window.location.href = "index.html";
+    selectModeEdition();
+    selectModifier();
+    hideFilters();
+    })
+  }
+};
+//Fonction affichage bandeau "mode édition"
+function selectModeEdition() {
+  const modeEditOverlay = document.querySelector('.mode-edit-overlay');//mode édition
+  modeEditOverlay.classList.remove('display-none');
+}
+//Fonction affichage lien "modifier"
+function selectModifier() {
+  const editModif = document.querySelector('.edit-modif');//modifier
+  editModif.classList.remove('display-none');
+}
+//Fonction cache les boutons filtres
+function hideFilters() {
+  const categoryButtonsContainer = document.getElementById('filter-buttons');
+  categoryButtonsContainer.classList.add('display-none')
 }
 
-function afficherErreurConnexion(login) {
-    const loginDiv = document.getElementById("loginDiv");
-    const spanErreurConnexion = document.createElement("span");
-    spanErreurConnexion.innerHTML = "Email ou mot de passe invalide";
-    spanErreurConnexion.classList.add("error-message");
-    spanErreurConnexion.classList.add("dataLogin");
-    loginDiv.insertBefore(spanErreurConnexion, login);
+// Fonction pour gérer la déconnexion
+function disConnect() {
+  logOut.addEventListener("click", () => {
+    if (isConnected()) {
+      window.localStorage.removeItem("token");
+      // window.localStorage.removeItem("userId");
+      logOut.textContent = "login";
+      window.location.href = "index.html";
+    } else {
+      // renvoi sur page connexion
+      window.location.href = "login.html";
+    }
+  });
 }
 
-// // Fonction pour mettre à jour l'interface utilisateur en fonction de la connexion
+/**** Fonctions ****/
+
+// Fonction de création du message d'erreur pour l'email
+// function createSpanErrorMail() {
+//     const spanErrorMail = document.createElement('span');
+//     spanErrorMail.classList.add('error-message');
+//     spanErrorMail.id = 'errorMail';
+//     spanErrorMail.textContent = 'Veuillez saisir un email avec un @';
+//     const emailInput = document.getElementById('email');
+//     emailInput.parentNode.insertBefore(spanErrorMail, emailInput.nextSibling);
+// };
+
+// Fonction de création du message d'erreur pour le mot de passe
+// function createSpanErrorPassword() {
+//     const spanErrorPassword = document.createElement('span');
+//     spanErrorPassword.classList.add('error-message');
+//     spanErrorPassword.id = 'errorPassword';
+//     spanErrorPassword.textContent = 'Veuillez saisir un mot de passe de 6 caractères minimum et sans espaces';
+//     passwordInput.parentNode.insertBefore(spanErrorPassword, passwordInput.nextSibling);
+//   };
+
+// Fonction pour vérifier les données du formulaire
+// function checkDataSubmit(emailValid,passwordValid) {
+//   let emailValid = false;
+//   if (emailInput.value.includes("@")) {
+//     emailValid = true;
+//     const errorMail = document.getElementById('errorMail');
+//     if (errorMail) errorMail.style.display = 'none';
+//   } else {
+//     createSpanErrorMail();
+//   }
+//   let passwordValid = false;
+//   const trimmedPassword = passwordInput.value.trim();
+//   if (trimmedPassword !== "" && !trimmedPassword.includes(" ") && trimmedPassword.length >= 6) {
+//     passwordValid = true;
+//     const errorPassword = document.getElementById('errorPassword');
+//     if (errorPassword) errorPassword.style.display = 'none';
+//   } else {
+//     createSpanErrorPassword();
+//   }
+//   return emailValid && passwordValid;
+// };
+
+//Fonction mise à jour
 // function updateUI() {
-//     const logLink = document.querySelector(".log");
-//     const editModif = document.querySelector(".edit-modif");
-//     const filterButtons = document.getElementById("filter-buttons");
+//   const loginLink = document.getElementById("login-link")
+//   const connected = localStorage.getItem("userId")
+//   if (connected === "true") {
+//     loginLink.innerHTML = "logout"
+//     loginLink.removeEventListener("click", connexion)
+//     loginLink.addEventListener("click", deconnexion)
+//   } else {
+//     loginLink.innerHTML = "login"
+//     loginLink.removeEventListener("click", deconnexion)
+//     loginLink.addEventListener("click", connexion)
+//   }
+// };
 
-//     if (isConnected()) {
-//         logLink.textContent = "logout";
-//         editModif.classList.remove("display-none");
-//         filterButtons.hidden = true;
-//     } else {
-//         logLink.textContent = "login";
-//         //editModif.classList.add("display-none");
-//         filterButtons.hidden = false;
-//     }
-// }
+// Fonction pour mettre à jour le texte du bouton de déconnexion
+// function updateLogoutButton() {
+//   if (isConnected()) {
+//     logOut.textContent = "logout";
+//   } else {
+//     logOut.textContent = "login";
+//   }
+// };
+
+// Vérifiez la connexion à l'initialisation
+// document.addEventListener("DOMContentLoaded", function () {
+//   if (isConnected()) {
+//     window.location.href = "index.html"; // Redirige vers index.html si l'utilisateur est déjà connecté
+//   } else {
+//     connect(); // Configure l'écouteur d'événement pour le formulaire de connexion
+//   }
+//   disConnect(); // Configure l'écouteur d'événement pour le bouton de déconnexion
+//   updateLogoutButton(); // Met à jour le texte du bouton de déconnexion
+// });
 

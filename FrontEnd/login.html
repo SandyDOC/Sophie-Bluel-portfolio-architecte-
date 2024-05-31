@@ -24,7 +24,7 @@
 			<ul>
 				<li><a href="index.html#portfolio">projets</a></li>
 				<li><a href="index.html#contact">contact</a></li>
-				<li class="log">login</li>
+				<li id="login-link" class="log">login</li>
 
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
@@ -36,13 +36,13 @@
             <form id="loginForm" method="post" action="#">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required>
-                <span id="emailError" class="error-message"></span>
                 <!-- <span id="emailError" class="error-message display-none"></span> -->
+
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password" required>
-                <span id="passwordError" class="error-message"></span>
                 <!-- <span id="passwordError" class="error-message display-none"></span> -->
-                <input type="submit" id="login" value="Se connecter">
+                
+                <input type="submit"  value="Se connecter">
             <a href="#" id="mdpOublie">Mot de passe oublié</a>
             </form>
         </div>

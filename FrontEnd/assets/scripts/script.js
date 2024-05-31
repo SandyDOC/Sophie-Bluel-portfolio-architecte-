@@ -1,10 +1,19 @@
-let projets = [];
-
-// Sélection des éléments du DOM
-const categoryButtonsContainer = document.getElementById('filter-buttons');
+/** Affichage des travaux  et filtres par catégories**/
 const gallery = document.querySelector('.gallery');
+const categoryButtonsContainer = document.getElementById('filter-buttons');
+/** Connexion **/
+// const logOut = document.getElementById("login-link");
+
+// const token = window.localStorage.getItem("token");
+// const user = window.localStorage.getItem("userId");
+/** Mode édition **/
+// const categoryButtonsContainer = document.getElementById('filter-buttons');
+const modeEditOverlay = document.querySelector('.mode-edit-overlay');//mode édition
+const editModif = document.querySelector('.edit-modif');//modifier
+const portfoliotext = document.querySelector('.portfolio-text');
 
 // Fetch pour récupérer les travaux de l'API
+let projets = [];
 fetchWorks()
     .then(projetsJson => {
         projets = projetsJson;
@@ -24,11 +33,19 @@ fetchCategories()
         console.error('Erreur lors de la récupération des données :', error);
     });
 
-// Appeler updateUI pour mettre à jour l'interface utilisateur au chargement de la page
+// import { isConnected } from "./user"; 
+
 // document.addEventListener("DOMContentLoaded", function () {
-//     updateUI();
-    
+//     // isConnected()
+//     // if (isConnected() = true){
+//     if (isConnected().ok) {
+//         selectModeEdition();
+//         selectModifier();
+//         hideFilters();
+//     }
 // });
+
+
 
 
 

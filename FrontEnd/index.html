@@ -14,11 +14,9 @@
 	<script src="https://kit.fontawesome.com/8f2991717e.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 
-
 	<script src="./assets/scripts/works.js" defer></script>
-
 	<script src="./assets/scripts/index.js" defer></script>
-
+	<script src="./assets/scripts/modal.js" defer></script>
 	<script src="./assets/scripts/script.js" defer></script>
 </head>
 
@@ -29,7 +27,7 @@
 			<ul>
 				<li><a href="#portfolio">projets</a></li>
 				<li><a href="#contact">contact</a></li>
-				<li><a class="log" href="login.html">login</a></li>
+				<li><a id="login-link" href="login.html">login</a></li>
 
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
@@ -38,12 +36,52 @@
 	<main>
 		<!-- <a href="#modal">Lien vers modal</a> -->
 		<!-- Modal -->
-		<!-- <aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal">
-			<div class="modal-wrapper">
-					<i class="fa-solid fa-xmark fa-lg"></i>
-					<h3 class="titleModal">Gallerie photo</h3>
-			</div>
-		</aside> -->
+		<!-- <aside id="modalContent" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal"> -->
+			<!-- <div class="modal-wrapper"> -->
+
+			<!-- <section class="modalPortfolio">
+				<i class=" close-modal-button fa-solid fa-xmark fa-lg"></i>
+				<h3 class="modal-gallery-title">Galerie photo</h3>
+				<div class="modal-gallery"></div>
+				<i class="modal-arrow-button fa-solid fa-arrow-left fa-lg display-none" aria-hidden="true"></i>
+				<h3 class="modal-add-title display-none">Ajouter photo</h3>
+				<form class="display-none" id="addImgForm" name="addImgForm">
+					<div class="img-form">
+						<div class="img-add" id="file">
+							<i class="imgIcon fa-regular fa-image" aria-hidden="true"></i>
+							<img src="#" alt="Prévisualisation de l'image" class="preview-img display-none"
+								id="preview">
+							<div class="button-add">
+								<input type="file" name="image" required>
+								+ Ajouter photo
+							</div>
+							<p class="add-text">jpg, png : 4mo max</p>
+							<p class="error"></p>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="title" required>
+						<label for="category">Catégorie</label>
+						<select name="category" id="category" required>
+							<option value="" label=" "></option>
+						</select>
+						<hr>
+						<input type="submit" class="modal-img-button disabled" value="Valider">
+					</div>
+				</form>
+				<hr id="hrModalGallery">
+				<button id="nextPage" class="modal-img-button">Ajouter une photo</button>
+			</section> -->
+			
+			<!-- <i class="fa-solid fa-xmark fa-lg"></i>
+					<h3 class="titleModal">Gallerie photo</h3> -->
+			<!-- </div> -->
+		<!-- </aside> -->
+		<!-- Mode édit -->
+		<div class="mode-edit-overlay display-none">
+			<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+			<p>Mode édition</p>
+		</div>
+		<!-- Fin mode édit -->
 
 		<section id="introduction">
 			<figure>
@@ -62,14 +100,15 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
-			<!-- Modal modifier -->
-			<a class="edit-modif display-none">
-				<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
-				<span>modifier</span>
-			</a>
-			<!--  -->
-
+			<div class="portfolio-text">
+				<h2>Mes Projets</h2>
+				<!-- modifier -->
+				<a class="edit-modif display-none">
+					<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+					<span>modifier</span>
+				</a>
+				<!--  -->
+			</div>
 			<div id="filter-buttons"></div>
 
 			<div class="gallery">
