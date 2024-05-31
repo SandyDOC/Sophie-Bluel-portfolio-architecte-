@@ -25,7 +25,8 @@
 // }
 
 document.addEventListener("DOMContentLoaded", function () {
-    isConnected()
+    // afficher les menus de l'utilisateur connecté
+    displayMenuUserConnected()
 //     // if (isConnected() = true){
 //     if (isConnected().ok) {
 //         selectModeEdition();

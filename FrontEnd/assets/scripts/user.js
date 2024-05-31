@@ -38,11 +38,13 @@ function connect() {
       body: chargeUtile,
     })
       .then((response) => {
+        console.log(response)
         if (!response.ok) {
-          afficherErreurConnexion(loginForm);
+          
           emailInput.style.border = "2px solid #FF0000";
           passwordInput.style.border = "2px solid #FF0000";
-          throw new Error("Le mot de passe ou l'identifiant que vous avez fourni est incorrect.");
+          throw new Error (afficherErreurConnexion(loginForm));
+          // throw new Error("Le mot de passe ou l'email que vous avez fourni est incorrect.");
         }
         return response.json();
       })
@@ -70,18 +72,46 @@ function connect() {
 // Fonction pour vérifier si l'utilisateur est connecté
 // export function isConnected() {
 function isConnected() {
-  const token = window.localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   // return token !== null && token !== "";
-  if (token !== null && token !== "") {
-    const logOut = document.getElementById("login-link");
-    logOut.addEventListener("click", () => {
-    window.location.href = "index.html";
-    selectModeEdition();
-    selectModifier();
-    hideFilters();
-    })
+  
+  if(token) {
+
+    return true;
+  }
+  else {
+    return false;
   }
 };
+
+function displayMenuUserConnected() {
+  // on récupère le lien du login
+  const logOut = document.getElementById("login-link");
+  // on vérifie si l'utilisateur est connecté. la fonction
+  // doit retouner true
+  if (isConnected()) {
+    // on change le lien "login" en "logout"
+    logOut.textContent = "logout";
+    // on affiche le bandeau en haut en mode édition
+    selectModeEdition();
+    // on affiche "modifier" à côté de "mes projets"
+    selectModifier();
+    // on cache les filtres
+    hideFilters();
+
+    // au click du lien "logout"
+    logOut.addEventListener("click", () => {
+      
+      // on déconnecte l'utilisateur
+      disConnect();
+      
+    })
+  }
+ 
+}
+
+
+
 //Fonction affichage bandeau "mode édition"
 function selectModeEdition() {
   const modeEditOverlay = document.querySelector('.mode-edit-overlay');//mode édition
@@ -91,6 +121,11 @@ function selectModeEdition() {
 function selectModifier() {
   const editModif = document.querySelector('.edit-modif');//modifier
   editModif.classList.remove('display-none');
+  // ajouter un évènement pour qu'au click de "modifier"
+  // on affiche la modale
+  editModif.addEventListener('click', function(){
+    afficherModale();
+  } );
 }
 //Fonction cache les boutons filtres
 function hideFilters() {
@@ -100,17 +135,16 @@ function hideFilters() {
 
 // Fonction pour gérer la déconnexion
 function disConnect() {
-  logOut.addEventListener("click", () => {
+  
     if (isConnected()) {
-      window.localStorage.removeItem("token");
+      localStorage.removeItem("token");
       // window.localStorage.removeItem("userId");
-      logOut.textContent = "login";
-      window.location.href = "index.html";
+      
     } else {
       // renvoi sur page connexion
       window.location.href = "login.html";
     }
-  });
+ 
 }
 
 /**** Fonctions ****/
