@@ -34,10 +34,21 @@ fetchCategories()
         console.error('Erreur lors de la récupération des données :', error);
     });
 
+// Fetch Delete
+async function fetchDelete(projectId, token) {
+    return fetch(`http://localhost:5678/api/works/${projectId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+}
 /*** Gestion du MODALE du HTML des PROJETS(ou travaux) */
 
-// document.addEventListener("DOMContentLoaded", function () {
-// });
+document.addEventListener("DOMContentLoaded", function () {
+    afficherModale();
+    fermerModale()
+});
 
 
 

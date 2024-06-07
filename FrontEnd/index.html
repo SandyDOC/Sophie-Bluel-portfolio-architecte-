@@ -35,48 +35,63 @@
 		</nav>
 	</header>
 	<main>
-		<!-- <a href="#modal">Lien vers modal</a> -->
+		<!-- <a href="#modal" class="modalLink">Lien vers modal</a> -->
 		<!-- Modal -->
-		<!-- <aside id="modalContent" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal"> -->
-			<!-- <div class="modal-wrapper"> -->
+		<!-- <aside id="modal" class="modal display-none" aria-hidden="true" role="dialog" aria-labelledby="titleModal"> -->
+		<aside id="modal" class="modal" style="display:none;" aria-hidden="true" role="dialog" aria-labelledby="titleModal"> <!--style="display:none" aria-modal="false"-->
+			<!-- boite blanche dans laquelle on met les élements -->
+			<section class="modal-wrapper">
+				<!-- <i class="fa-solid fa-trash-can fa-lg"></i> -->
 
-			<!-- <section class="modalPortfolio">
-				<i class=" close-modal-button fa-solid fa-xmark fa-lg"></i>
-				<h3 class="modal-gallery-title">Galerie photo</h3>
-				<div class="modal-gallery"></div>
-				<i class="modal-arrow-button fa-solid fa-arrow-left fa-lg display-none" aria-hidden="true"></i>
-				<h3 class="modal-add-title display-none">Ajouter photo</h3>
-				<form class="display-none" id="addImgForm" name="addImgForm">
-					<div class="img-form">
-						<div class="img-add" id="file">
-							<i class="imgIcon fa-regular fa-image" aria-hidden="true"></i>
-							<img src="#" alt="Prévisualisation de l'image" class="preview-img display-none"
-								id="preview">
-							<div class="button-add">
-								<input type="file" name="image" required>
-								+ Ajouter photo
-							</div>
-							<p class="add-text">jpg, png : 4mo max</p>
-							<p class="error"></p>
-						</div>
-						<label for="title">Titre</label>
-						<input type="text" name="title" id="title" required>
-						<label for="category">Catégorie</label>
-						<select name="category" id="category" required>
-							<option value="" label=" "></option>
-						</select>
-						<hr>
-						<input type="submit" class="modal-img-button disabled" value="Valider">
-					</div>
-				</form>
-				<hr id="hrModalGallery">
-				<button id="nextPage" class="modal-img-button">Ajouter une photo</button>
-			</section> -->
-			
-			<!-- <i class="fa-solid fa-xmark fa-lg"></i>
-					<h3 class="titleModal">Gallerie photo</h3> -->
-			<!-- </div> -->
-		<!-- </aside> -->
+				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
+				<h3 id="titleModal">Galerie photo</h3>
+
+				<div class="galleryModal">
+					<!-- <figure>
+						<i class="fa-solid fa-trash-can"></i>
+						<img class="modalImg" src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/restaurant-sushisen-londres.png"
+							alt="Restaurant Sushisen - Londres">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/la-balisiere.png"
+							alt="Villa “La Balisiere” - Port Louis">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/structures-thermopolis.png"
+							alt="Structures Thermopolis">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/le-coteau-cassis.png"
+							alt="Pavillon “Le coteau” - Cassis">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/appartement-paris-xviii.png"
+							alt="Appartement Paris XVIII">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
+					</figure>
+					<figure>
+						<img class="modalImg" src="assets/images/hotel-first-arte-new-delhi.png"
+							alt="Hotel First Arte - New Delhi">
+					</figure> -->
+				</div>
+				<div class="line"></div>
+				<input type="submit" value="Ajouter une photo">
+			</section>
+		</aside>
 		<!-- Mode édition -->
 		<div class="mode-edit-overlay display-none">
 			<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
@@ -103,9 +118,10 @@
 			<div class="portfolio-text">
 				<h2>Mes Projets</h2>
 				<!-- modifier -->
-				<a class="edit-modif display-none">
-					<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
-					<span>modifier</span>
+				<a href="#modal" class="edit-modif display-none">
+					<!-- <i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+					<span>modifier</span> -->
+					modifier
 				</a>
 				<!--  -->
 			</div>
