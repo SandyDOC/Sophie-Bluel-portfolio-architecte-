@@ -5,13 +5,13 @@
 // const logLink = document.getElementById("login-link");
 
 // Fonction de création du message d'erreur pour le mot de passe
-function afficherErreurConnexion(dataLogin) {
+function afficherErreurConnexion(loginForm) {
   const loginDiv = document.getElementById("loginDiv");
   const spanErreurConnexion = document.createElement("span");
   spanErreurConnexion.innerHTML = "Email ou mot de passe invalide";
   spanErreurConnexion.classList.add("error-message");
   spanErreurConnexion.classList.add("dataLogin");
-  loginDiv.insertBefore(spanErreurConnexion, dataLogin);
+  loginDiv.insertBefore(spanErreurConnexion, loginForm);
 
   // const emailInput = document.getElementById("email");
   // const passwordInput = document.getElementById("password");
@@ -63,7 +63,7 @@ function connect() {
           window.location.href = 'index.html';
         })
         .catch((error) => {
-          afficherErreurConnexion(dataLogin);
+          afficherErreurConnexion(loginForm);
           console.error("Une erreur est survenue : ", error);
         });
     // };
@@ -116,6 +116,7 @@ function selectModifier() {
   // ajouter un évènement pour qu'au click de "modifier"
   // on affiche la modale
   editModif.addEventListener('click', function () {
+   
     afficherModale();
   });
 }

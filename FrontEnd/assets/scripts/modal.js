@@ -8,28 +8,28 @@ function afficherModale() {
   // change le style de l'élément pour pouvoir l'afficher
   // modalWrapper.classList.remove('display-none')
 
-  // modalWrapper.style.display = null;
+  modalWrapper.style.display = "flex";
 
   modalWrapper.removeAttribute('aria-hidden')
   // on affiche la liste des projets de la modale
   afficherProjetsModale();
   // on ajoute un évèment pour fermer la modaleau click de la croix
-  modalWrapper.addEventListener('click', fermerModale)
+  modalWrapper.addEventListener('click', fermerModale(modalWrapper))
 }
 
-function fermerModale() {
+function fermerModale(modalWrapper) {
   //sélectionner la croix de fermeture
   const closeCross = document.querySelector('.close-modal-button')
   //au clic sur la croix la modale se ferme (ne s'affiche plus)
   closeCross.addEventListener('click', function () {
-    modalWrapper.classList.add('display-none')
+    modalWrapper.style.display = "none";
   })
 }
 
 /** récupération des works & appel de la fonction de création de works dans la gallery de la modal */
 function afficherProjetsModale() {
   // fetch pour récupérer les projets
-  // galleryModal.innerHTML = '';
+  galleryModal.innerHTML = '';
 
   fetchWorks()
     .then(projetsJson => {
