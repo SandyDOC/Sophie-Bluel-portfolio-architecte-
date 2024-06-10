@@ -11,18 +11,41 @@ function afficherModale() {
   modal.removeAttribute('aria-hidden')
   // on affiche la liste des projets de la modale
   afficherProjetsModale();
+  // on ajoute un évènement pour fermer la modale au clic de la croix
+  fermerModale();
+  // on ajoute un évènement pour fermer la modale au clic en dehors de celle-ci
+  window.addEventListener('click', fermerModaleExterne);
+
   // on ajoute un évèment pour fermer la modale au click de la croix
-  modal.addEventListener('click', fermerModale(modal))
-  // window.addEventListener('click', fermerModale(modal))
+  // modal.addEventListener('click', fermerModale(modal))
 }
 
-function fermerModale(modal) {
-  //sélectionner la croix de fermeture
+// function fermerModale(modal) {
+//   //sélectionner la croix de fermeture
+//   const closeCross = document.querySelector('.close-modal-button');
+//   //au clic sur la croix la modale se ferme (ne s'affiche plus)
+//   closeCross.addEventListener('click', function() {
+//     modal.style.display = "none";
+//   })
+// }
+function fermerModale() {
+  // sélectionner la croix de fermeture
   const closeCross = document.querySelector('.close-modal-button');
-  //au clic sur la croix la modale se ferme (ne s'affiche plus)
+  // au clic sur la croix la modale se ferme (ne s'affiche plus)
   closeCross.addEventListener('click', function() {
     modal.style.display = "none";
-  })
+    modal.setAttribute('aria-hidden', 'true');
+    window.removeEventListener('click', fermerModaleExterne);
+  });
+}
+
+function fermerModaleExterne(event) {
+  // vérifier si le clic est en dehors de la modale
+  if (event.target === modal) {
+    modal.style.display = "none";
+    modal.setAttribute('aria-hidden', 'true');
+    window.removeEventListener('click', fermerModaleExterne);
+  }
 }
 
 /** récupération des works & appel de la fonction de création de works dans la gallery de la modal */
