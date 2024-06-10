@@ -61,6 +61,9 @@ function displayCategories(categories) {
     
     // Création du bouton "Tous"
     const btnAll = document.createElement("button");
+
+    btnAll.classList.add("btn");
+
     btnAll.classList.add("filters");
     btnAll.classList.add("btn_selected");
     btnAll.innerHTML = "Tous";
@@ -72,6 +75,9 @@ function displayCategories(categories) {
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
         const button = document.createElement("button");
+
+        button.classList.add("btn");
+        
         button.classList.add("filters");
         button.innerHTML = category.name;
         button.dataset.category = category.id;

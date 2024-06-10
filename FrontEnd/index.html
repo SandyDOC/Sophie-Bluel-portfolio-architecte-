@@ -37,7 +37,8 @@
 	<main>
 
 		<!-- Modal -->
-		<aside id="modal" class="modal" style="display:none;" aria-hidden="true" role="dialog" aria-labelledby="titleModal"> 
+		<aside id="modal" class="modal" style="display:none;" aria-hidden="true" role="dialog"
+			aria-labelledby="titleModal">
 			<!-- boite blanche dans laquelle on met les élements -->
 			<section class="modal-wrapper">
 
@@ -87,16 +88,45 @@
 					</figure> -->
 				</div>
 				<div class="line"></div>
-				<input type="submit" value="Ajouter un projet">
+				<input class="btn" type="submit" value="Ajouter un projet">
 			</section>
 		</aside>
 
-		<aside id="modal2" class="modal" style="display:none;" aria-hidden="true" role="dialog" aria-labelledby="titleModal"> 
+		<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal"
+		style="display:none;">
 			<!-- boite blanche dans laquelle on met les élements -->
-			<section class="modal-wrapper">
-				
+			<section class="modal-wrapper modal2">
+
+				<i class="fa-solid fa-arrow-left fa-lg"></i>
+
+				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
+				<h3 id="titleModal">Ajout photo</h3>
+
+				<form id="formAddWorks">
+					<div class="containerAddPhoto">
+						<i class="fa-regular fa-image"></i>
+						<label class="labelFile labelModal2 btnAddPhoto" for="file">+ Ajouter photo</label>
+						<p class="txtFormatPhoto">jpg,png : 4mo max</p>
+						<!-- <input type="file" name="image" id="file" accept="image/jpg, image/png" required>
+						<img id="previewImage" src="#" alt="Aperçu de l'image"> -->
+					</div>
+					<label class="labelModal2" for="title">Titre</label>
+					<input class="inputBorder" type="text" name="title" id="title" required>
+					<label class="labelModal2" for="categoryInput">Catégorie</label>
+					
+					<select class="inputBorder" id="categoryInput" name="category" required>
+					</select>
+					
+					<div class="line lineModal2"></div>
+
+					<div class="container-button-add-work ">
+						<!-- <button type="submit" class="button-add-work">Valider</button> -->
+						<input class="btnValider" type="submit" value="Valider">
+					</div>
+				</form>
+
 			</section>
-		</aside>	
+		</aside>
 
 		<!-- Mode édition -->
 		<div class="mode-edit-overlay display-none">
@@ -190,7 +220,7 @@
 				<input type="email" name="email" id="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
-				<input type="submit" value="Envoyer">
+				<input class="btn" type="submit" value="Envoyer">
 			</form>
 		</section>
 	</main>

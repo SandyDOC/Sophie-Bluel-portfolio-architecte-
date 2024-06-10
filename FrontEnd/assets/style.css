@@ -304,17 +304,22 @@ input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
   color: white;
-  background-color: #1d6154;
+  /* background-color: #1d6154; */
   margin: 2em auto;
   width: 180px;
   text-align: center;
   border-radius: 60px;
-  height: 50px;
+  /* height: 50px; */
   border: none;
 }
-input[type="submit"]:hover {
+/* input[type="submit"]:hover */
+.btn:hover {
   background-color: #0e2f28;
   cursor: pointer;
+}
+.btn {
+  background-color: #1d6154;
+  height: 50px;
 }
 
 /* Footer */
@@ -381,7 +386,8 @@ footer nav ul {
   color: #fff;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 100;
+  /* z-index: 9999; */
   font-size: 16px;
   font-weight: 400;
   gap: 21px;
@@ -441,7 +447,7 @@ footer nav ul {
   background-color: #fff;
   border-radius: 10px;
   position: absolute;
-  top: 1%;
+  top: 9%;
   text-align: center;
   box-sizing: border-box;
 
@@ -457,7 +463,8 @@ footer nav ul {
   right: 35px;
   cursor: pointer;
 }
-.modal h3 {
+/* .modal h3  */
+#titleModal {
   font-family: Work Sans;
   font-size: 26px;
   font-weight: 400;
@@ -499,3 +506,209 @@ footer nav ul {
 .line {
   border: 1px solid #b3b3b3;
 }
+/** Modal2 = add photo*/
+.modal2 {
+  top: 1%;
+}
+.fa-arrow-left {
+  position: absolute;
+  top: 22px;
+  left: 18px;
+  cursor: pointer;
+}
+#formAddWorks {
+  display: flex;
+  flex-direction: column;
+}
+.containerAddPhoto {
+  display: flex;
+  flex-direction: column;
+
+  height: 169px;
+  width: 420px;
+  margin-top: 20px;
+
+  background: #e8f1f6;
+  border-radius: 3px;
+  align-items: center;
+}
+#formAddWorks .containerAddPhoto .fa-image {
+
+  font-size: 4rem;
+  color: #b9c5cc;
+  padding: 15px;
+}
+.labelModal2 {
+  padding: 10px;
+  font-weight: 500;
+  text-align: justify;
+
+}
+.txtFormatPhoto {
+  font-family: Work Sans;
+  font-size: 10px;
+  color: #444444;
+  padding-top: 5px;
+}
+.btnAddPhoto {
+  background: #cbd6dc;
+  border-radius: 50px;
+  /* height: 36px; */
+  width: 173px;
+
+  color: #306685;
+  /* font-family: Work Sans; */
+  font-weight: 500;
+  /* font-size: 14px; */
+  text-align: center;
+  cursor: pointer;
+}
+.inputBorder {
+  height: 51px;
+  margin-bottom: 23px;
+
+  width: 420px;
+
+  border: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+}
+.lineModal2 {
+  margin-top: 20px;
+}
+.btnValider {
+  /* font-family: "Syne";
+  font-weight: 700;
+  color: white; */
+  background-color: #a7a7a7;
+  /* margin: 2em auto; */
+  width: 237px;
+  /* text-align: center; */
+  border-radius: 60px;
+  height: 36px;
+  /* border: none; */
+}
+.btnValider:hover {
+  background-color: #1d6154;
+  color: white;
+  cursor: pointer;
+}
+/* .modalAddWorks {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 500px;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+  width: 32%;
+  height: 66%;
+}
+.modalAddWorks .arrow-left {
+  position: absolute;
+  top: 30px;
+  left: 15px;
+}
+.modalAddWorks .arrow-left .fa-arrow-left {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modalAddWorks .xmark {
+  position: absolute;
+  top: 30px;
+  right: 15px;
+}
+.modalAddWorks .xmark .fa-xmark {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modalAddWorks h3 {
+  margin-top: 60px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.modalAddWorks form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80%;
+  width: 80%;
+  gap: 20px;
+}
+.modalAddWorks form .containerAddPhoto {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  background-color: #e8f1f6;
+  gap: 10px;
+}
+.modalAddWorks form .containerAddPhoto img {
+  display: none;
+  max-width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: absolute;
+}
+.modalAddWorks form .containerAddPhoto .fa-image {
+  font-size: 4rem;
+  color: #b9c5cc;
+}
+.modalAddWorks form .containerAddPhoto .labelFile {
+  display: block;
+  display: flex;
+  align-items: center;
+  background-color: #b9c5cc;
+  border-radius: 15px;
+  height: 30px;
+  padding: 0 20px;
+  color: #306685;
+  cursor: pointer;
+}
+.modalAddWorks form .containerAddPhoto input {
+  opacity: 0;
+}
+.modalAddWorks form #title {
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  height: 8%;
+}
+.modalAddWorks form #categoryInput {
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  height: 8%;
+}
+.modalAddWorks form .container-button-add-work {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  border-top: 1px solid gray;
+}
+.modalAddWorks form .container-button-add-work .buttonValidForm {
+  background-color: #1d6154;
+  padding: 9px 50px;
+  border-radius: 25px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: Syne;
+  cursor: pointer;
+}
+.modalAddWorks form .container-button-add-work .button-add-work {
+  background-color: #a7a7a7;
+  padding: 9px 50px;
+  border-radius: 25px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: Syne;
+  cursor: pointer;
+} */
+/* .modalAddWorks form .container-button-add-work .button-add-work:hover {
+  background-color: white;
+  border: 1px solid #1d6154;
+  color: #1d6154;
+} */

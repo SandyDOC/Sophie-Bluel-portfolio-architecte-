@@ -1,10 +1,12 @@
 
 const galleryModal = document.querySelector('.galleryModal');
 const modal = document.getElementById('modal')
+// const modal = document.querySelectorAll('.modal');
 
 /* Affichage de la Modal uniquement si connecté grace au click sur le bouton modifié*/
 function afficherModale() {
   // récupère la modale à partir de son id
+  // const modal = document.querySelectorAll('.modal');
   const modal = document.getElementById('modal');
   // change le style de l'élément pour pouvoir l'afficher
   modal.style.display = "flex";
@@ -30,6 +32,7 @@ function afficherModale() {
 // }
 function fermerModale() {
   // sélectionner la croix de fermeture
+  // const closeCross = document.querySelectorAll('.close-modal-button');
   const closeCross = document.querySelector('.close-modal-button');
   // au clic sur la croix la modale se ferme (ne s'affiche plus)
   closeCross.addEventListener('click', function() {
@@ -85,25 +88,16 @@ function displayWorksModal(projet) {
 }
 
 /******** */
-function deleteProjet(projectId) {
-  //fetch method delete pour les supprimer dans l'API
-  fetchDelete(projectId, token)
-  // mise a jour modale et gallery principale
- .then(() => {
-  modalWrapper.classList.add('display-none');
-  galleryModal.innerHTML='';
- })
+// function deleteProjet(projectId) {
+//   //fetch method delete pour les supprimer dans l'API
+//   fetchDelete(projectId, token)
+//   // mise a jour modale et gallery principale
 
-  // ajoute de l'évèment au clique de la poubelle pour supprimer le projet
-  const trashIcon = document.querySelector(".fa-trash-can");
-  trashIcon.addEventListener('click', function (event) {
-    btnSelected(event)
-    // appel de la fonction qui supprime le projet
-    if (event.target.classList === "btn_selected"){
-      deleteProjet(projectId);
-    }
-  })
-}
+//   // ajoute de l'évèment au clique de la poubelle pour supprimer le projet
+//   const trashIcon = document.querySelector(".fa-trash-can");
+//   trashIcon.addEventListener('click', function (event) {
+//     // appel de la fonction qui supprime le projet
+// }
 
 
 
