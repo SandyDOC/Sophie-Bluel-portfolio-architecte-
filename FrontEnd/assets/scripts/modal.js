@@ -1,36 +1,34 @@
 
 const galleryModal = document.querySelector('.galleryModal');
+const modal = document.getElementById('modal')
 
 /* Affichage de la Modal uniquement si connecté grace au click sur le bouton modifié*/
 function afficherModale() {
   // récupère la modale à partir de son id
-  const modalWrapper = document.getElementById('modal');
+  const modal = document.getElementById('modal');
   // change le style de l'élément pour pouvoir l'afficher
-  // modalWrapper.classList.remove('display-none')
-
-  modalWrapper.style.display = "flex";
-
-  modalWrapper.removeAttribute('aria-hidden')
+  modal.style.display = "flex";
+  modal.removeAttribute('aria-hidden')
   // on affiche la liste des projets de la modale
   afficherProjetsModale();
-  // on ajoute un évèment pour fermer la modaleau click de la croix
-  modalWrapper.addEventListener('click', fermerModale(modalWrapper))
+  // on ajoute un évèment pour fermer la modale au click de la croix
+  modal.addEventListener('click', fermerModale(modal))
+  // window.addEventListener('click', fermerModale(modal))
 }
 
-function fermerModale(modalWrapper) {
+function fermerModale(modal) {
   //sélectionner la croix de fermeture
-  const closeCross = document.querySelector('.close-modal-button')
+  const closeCross = document.querySelector('.close-modal-button');
   //au clic sur la croix la modale se ferme (ne s'affiche plus)
-  closeCross.addEventListener('click', function () {
-    modalWrapper.style.display = "none";
+  closeCross.addEventListener('click', function() {
+    modal.style.display = "none";
   })
 }
 
 /** récupération des works & appel de la fonction de création de works dans la gallery de la modal */
 function afficherProjetsModale() {
-  // fetch pour récupérer les projets
   galleryModal.innerHTML = '';
-
+  // fetch pour récupérer les projets
   fetchWorks()
     .then(projetsJson => {
       projets = projetsJson;
@@ -61,17 +59,9 @@ function displayWorksModal(projet) {
   span.appendChild(trash)
   figure.appendChild(span);
   galleryModal.appendChild(figure);
-
-  //pour chaque projet créé une poubelle
-  // projets.forEach((projet) => {
-  //   const span = document.createElement("span")
-  //   const trash = document.createElement("i");
-  //   trash.classList.add("fa-solid", "fa-trash-can");
-  //   trash.id = projet.id;
-  // })
 }
 
-
+/******** */
 function deleteProjet(projectId) {
   //fetch method delete pour les supprimer dans l'API
   fetchDelete(projectId, token)
