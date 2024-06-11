@@ -116,7 +116,6 @@ function selectModifier() {
   // ajouter un évènement pour qu'au click de "modifier"
   // on affiche la modale
   editModif.addEventListener('click', function () {
-   
     afficherModale();
   });
 }

@@ -33,6 +33,7 @@ function displayWorks(idCategorie = 0) {
         figure.dataset.id = projet.id;
 
         const img = document.createElement('img');
+        img.classList.add('sizeImg')
         img.src = projet.imageUrl;
         img.alt = projet.title;
 
