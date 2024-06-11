@@ -46,11 +46,14 @@ async function fetchDelete(projectId, token) {
 /*** Gestion du MODALE du HTML des PROJETS(ou travaux) */
 
 document.addEventListener("DOMContentLoaded", function () {
-    if (isConnected() && modal.getAttribute("aria-hidden") === "false" )
+    if (isConnected())
+        //  && modal.getAttribute("aria-hidden") === "false" )
     // || modal2.getAttribute("aria-hidden") === "false")
     {
         afficherModale();
         fermerModale();
+        // deleteProjet();
+        selectBtnAddPhoto();
         // afficherModal2();
     }
 });

@@ -269,9 +269,10 @@ li a:hover {
   width: 100%;
 }
 .sizeImg {
-  height: 197px;
+  /* height: 197px; */
+  height: 500px;
   object-fit: cover;
-  width: 148px;
+  /* width: 148px; */
 }
 /* contact (form) */
 #contact {
