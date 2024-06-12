@@ -1,15 +1,10 @@
-
-const galleryModal = document.querySelector('.galleryModal');
-const modal = document.getElementById('modal')
-const modal2 = document.getElementById('modal2')
-// const modal = document.querySelector('.modal');
-// const modal2 = document.querySelector('.modal2')
-// const modal = document.querySelectorAll('.modal');
+// const galleryModal = document.querySelector('.galleryModal');
+// const modal = document.getElementById('modal')
+// const modal2 = document.getElementById('modal2')
 // const token = window.localStorage.getItem("token");
 
-
-/* Affichage de la Modal uniquement si connecté grace au click sur le bouton modifié*/
-function afficherModale() {
+/* Fonction pour afficher de la Modal uniquement si connecté grace au click sur le bouton modifié*/
+async function afficherModale() {
   // récupère la modale à partir de son id
   // const modal = document.getElementById('modal');
   // change le style de l'élément pour pouvoir l'afficher
@@ -34,6 +29,8 @@ function afficherModale() {
 //     modal.style.display = "none";
 //   })
 // }
+
+//Fonction pour fermer la modal
 function fermerModale() {
   // sélectionner la croix de fermeture
   const closeCross = document.querySelector('.close-modal-button');
@@ -42,30 +39,31 @@ function fermerModale() {
     if (modal) {
       modal.style.display = "none";
       modal.setAttribute('aria-hidden', 'true');
+      window.removeEventListener('click', fermerModaleExterne);
     } else if (modal2) {
       modal2.style.display = "none";
       modal2.setAttribute('aria-hidden', 'true');
+      window.removeEventListener('click', fermerModaleExterne);
     }
-    window.removeEventListener('click', fermerModaleExterne);
   });
 }
-
+//Fonction pour fermer la modal en dehors 
 function fermerModaleExterne(event) {
   event.preventDefault();
-  // vérifier si le clic est en dehors de la modale
+  // vérifie si le clic est en dehors de la modale
   if (event.target === modal) {
     modal.style.display = "none";
     modal.setAttribute('aria-hidden', 'true');
-  window.removeEventListener('click', fermerModaleExterne);
+    window.removeEventListener('click', fermerModaleExterne);
   }
   else if (event.target === modal2) {
     modal2.style.display = "none";
     modal2.setAttribute('aria-hidden', 'true');
     window.removeEventListener('click', fermerModaleExterne);
-    }
+  }
 }
 
-/** récupération des works & appel de la fonction de création de works dans la gallery de la modal */
+/**Fonction pour récupérer les works & appel de la fonction de création de works dans la gallery de la modal */
 function afficherProjetsModale() {
   galleryModal.innerHTML = '';
   // fetch pour récupérer les projets
@@ -78,7 +76,7 @@ function afficherProjetsModale() {
     })
 }
 
-// crééer des éléments html pour avoir la liste de projets
+//Fonction pour crééer des éléments html(figure,img,span,i'trash') pour avoir la liste de projets
 function displayWorksModal(projet) {
 
   const figure = document.createElement('figure');
@@ -102,6 +100,7 @@ function displayWorksModal(projet) {
 }
 
 /******** */
+//Fonction pour supprimer les travaux, projets
 // function deleteProjet() {
 //    // ajoute de l'évèment au clique de la poubelle pour supprimer le projet
 //   const trashIcon = document.querySelector(".fa-trash-can");
@@ -117,8 +116,16 @@ function displayWorksModal(projet) {
 //     })
 //   })
 // }
-//   // mise a jour modale et gallery principale
-//     // appel de la fonction qui supprime le projet
+
+// Fetch Delete
+// async function fetchDelete(projectId, token) {
+//   return fetch(`http://localhost:5678/api/works/${projectId}`, {
+//       method: 'DELETE',
+//       headers: {
+//           'Authorization': `Bearer ${token}`
+//       }
+//   });
+// }
 
 // function afficherModal2() {
 //   //si modal disparait alors modal2 apparait
@@ -128,7 +135,8 @@ function displayWorksModal(projet) {
 //   // }
 // }
 
-function selectBtnAddPhoto() {
+//Fonction permettant de passer de la modal1(galerie photo) à la modal2(ajout photo)
+function modalNext() {
   //selectionne le bouton ajouter une photo
   const btnAddPhoto = document.querySelector('.addPhoto')
   //au click sur le bouton "ajouter une photo" je passe à la modale2 et modale1 disparait
@@ -140,40 +148,47 @@ function selectBtnAddPhoto() {
     // afficherModale2();
   })
 }
-// function selectBtnAddPhoto() {
-//   const btnAddPhoto = document.querySelector('.addPhoto')
-//   // ajouter un évènement pour qu'au click de "modifier"
-//   // on affiche la modale
-//   btnAddPhoto.addEventListener('click', function () {
-//     afficherModal2();
-//   });
-// }
 
+//Fonction pour revenir sur la modal : galerie photo
+function backModalGallery() {
+  /**selectionne arrow-left*/
+  // const arrowLeft = document.querySelector('a .arrowBack');
+  const arrowLeft = document.querySelector('.modal2 .fa-arrow-left');
+  //au click sur l'icone arrowLeft, je suis redirigé vers modal1 (modal2 disparait)
+  arrowLeft.addEventListener('click', function () {
+    // console.log(arrowLeft,"back")
+    modal2.style.display = "none";
+    modal2.setAttribute('aria-hidden', 'true');
+    modal.style.display = "flex";
+    modal.setAttribute('aria-hidden', 'false');
+  });
+}
+
+// Fonction ajouter une nouvelle photo dans modal "Galerie photo"
 function addNewPhoto() {
   //selectionne bouton ajouter une photo(modale2)
+  const btnAddPhoto = document.querySelector('label .btnAddPhoto')
   //au click sur ce bouton je recupere fichier 'photo'
   //  + previsualisation image de la photo 
-  previewImg()
-  //Ce fichier est envoyé (post fetchSend API) et stocké
+  btnAddPhoto.addEventListener('click', function() {
+    previewImg()
+  })
 }
 
-function previewImg() {
+// Fonction pour avoir un aperçu de l'image récupéré en local
+function previewImg() {}
 
-}
-
-function backModalGallery() {
-  //selectionne arrow-left
-  //selectionne modal1
-  //au click sur l'icone, je suis redirigé vers modal1
-}
-
-//fonction du menu deoulant des categories(objet, appartement, restaurant)
+//fonction du menu deroulant des categories(objet, appartement, restaurant)
 function selectFormCategories() {
-
+  // const formSelect = document.getElementById('categoryInput');
+  // const categories = fetch('http://localhost:5678/api/categories');
+  // // const categories = fetchCategories();
+  // categories.forEach(category => {
+  //     const option = document.createElement('option');
+  //     option.value = category.id;
+  //     option.textContent = category.name;
+  //     formSelect.appendChild(option);
+  // });
 }
-
-// fontion qui vérifie si tout les inputs sont remplis
-function verifFormCompleted() { }
-
 
 

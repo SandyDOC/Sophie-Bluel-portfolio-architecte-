@@ -1,17 +1,9 @@
-/*** Gestion de page d'accueil HTML des PROJETS(ou travaux) */
+/*** Gestion de page d'accueil HTML des PROJETS(ou travaux : works) */
 
+// Variables et sélecteurs
 /** Affichage des travaux  et filtres par catégories**/
 const gallery = document.querySelector('.gallery');
 const categoryButtonsContainer = document.getElementById('filter-buttons');
-/** Connexion **/
-// const log = document.getElementById("login-link");
-// const token = window.localStorage.getItem("token");
-// const user = window.localStorage.getItem("userId");
-/** Mode édition = isConnected **/
-// const categoryButtonsContainer = document.getElementById('filter-buttons');
-// const modeEditOverlay = document.querySelector('.mode-edit-overlay');//mode édition
-// const editModif = document.querySelector('.edit-modif');//modifier
-// const portfoliotext = document.querySelector('.portfolio-text');
 
 // Fetch pour récupérer les travaux de l'API
 let projets = [];
@@ -35,29 +27,14 @@ fetchCategories()
     });
 
 // Fetch Delete
-async function fetchDelete(projectId, token) {
-    return fetch(`http://localhost:5678/api/works/${projectId}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-}
-/*** Gestion du MODALE du HTML des PROJETS(ou travaux) */
-
-document.addEventListener("DOMContentLoaded", function () {
-    if (isConnected())
-        //  && modal.getAttribute("aria-hidden") === "false" )
-    // || modal2.getAttribute("aria-hidden") === "false")
-    {
-        afficherModale();
-        fermerModale();
-        // deleteProjet();
-        selectBtnAddPhoto();
-        // afficherModal2();
-    }
-});
-
+// async function fetchDelete(projectId, token) {
+//   return fetch(`http://localhost:5678/api/works/${projectId}`, {
+//       method: 'DELETE',
+//       headers: {
+//           'Authorization': `Bearer ${token}`
+//       }
+//   });
+// }
 
 
 
