@@ -97,6 +97,8 @@ function displayWorksModal(projet) {
 
 }
 
+
+
 // Fonction supprimer un projet
 // const idProject = projet.id;
 function deleteProjet(idProject) {
@@ -104,16 +106,18 @@ function deleteProjet(idProject) {
   const token = localStorage.getItem("token");
 
   // récupérer les deux figures (de gallery et galleryModal) et les supprimer du DOM :
-  const figureGallery = document.querySelector('.gallery figure');
-  const figureGalleryModal = document.querySelector('.galleryModal figure');
+  // .gallery figure[data-id='1']
+  
+  // `.gallery figure[data-id='${idProject}']`
+  const figureGallery = document.querySelector(".gallery figure[data-id='"+idProject+"']");
+  const figureGalleryModal = document.querySelector(".galleryModal figure[data-id='"+idProject+"']");
 
   fetchDelete(idProject, token)
     .then(response => {
       if (response.ok) {
         figureGallery.remove();
         figureGalleryModal.remove();
-        afficherProjetsModale();
-        displayWorks();
+        
         console.log(`Le projet avec l'ID ${idProject} a été supprimé.`);
       } else {
         console.log(`Une erreur s'est produite lors de la suppression du projet avec l'ID ${projectId}.`);
