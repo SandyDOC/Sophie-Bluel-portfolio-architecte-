@@ -554,6 +554,20 @@ footer nav ul {
 .btnAddPhoto {
   padding: 10px;
   font-weight: 500;
+  cursor: pointer;
+}
+.containerAddPhoto {
+  position: relative;
+  overflow: hidden;
+  /* display: inline-block; */
+}
+.file-input {
+  /* font-size: 142px; */
+  /* font-size: 100px; */
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
 /* .modalAddWorks form .containerAddPhoto input {
   opacity: 0;

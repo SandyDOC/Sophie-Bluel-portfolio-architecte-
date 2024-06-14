@@ -4,7 +4,7 @@
 // const token = window.localStorage.getItem("token");
 
 /* Fonction pour afficher de la Modal uniquement si connecté grace au click sur le bouton modifié*/
-async function afficherModale() {
+function afficherModale() {
   // récupère la modale à partir de son id
   // const modal = document.getElementById('modal');
   // change le style de l'élément pour pouvoir l'afficher
@@ -13,41 +13,33 @@ async function afficherModale() {
   // on affiche la liste des projets de la modale
   afficherProjetsModale();
   // on ajoute un évènement pour fermer la modale au clic de la croix
-  fermerModale();
+  // fermerModale();
   // on ajoute un évènement pour fermer la modale au clic en dehors de celle-ci
   window.addEventListener('click', fermerModaleExterne);
-
-  // on ajoute un évèment pour fermer la modale au click de la croix
-  // modal.addEventListener('click', fermerModale(modal))
 }
-
-// function fermerModale(modal) {
-//   //sélectionner la croix de fermeture
-//   const closeCross = document.querySelector('.close-modal-button');
-//   //au clic sur la croix la modale se ferme (ne s'affiche plus)
-//   closeCross.addEventListener('click', function() {
-//     modal.style.display = "none";
-//   })
-// }
 
 //Fonction pour fermer la modal
 function fermerModale() {
   // sélectionner la croix de fermeture
-  const closeCross = document.querySelector('.close-modal-button');
-  // au clic sur la croix la modale se ferme (ne s'affiche plus)
-  closeCross.addEventListener('click', function () {
-    if (modal) {
-      modal.style.display = "none";
-      modal.setAttribute('aria-hidden', 'true');
-      window.removeEventListener('click', fermerModaleExterne);
-    } else if (modal2) {
-      modal2.style.display = "none";
-      modal2.setAttribute('aria-hidden', 'true');
-      window.removeEventListener('click', fermerModaleExterne);
-    }
-  });
+  const closeCrossList = document.querySelectorAll('.close-modal-button');
+  closeCrossList.forEach((closeCross) => {
+    // au clic sur la croix la modale se ferme (ne s'affiche plus)
+    closeCross.addEventListener('click', function (e) {
+      // console.log(e, "close");
+      if (e.target.closest(".modal").id == "modal") {
+        modal.style.display = "none";
+        modal.setAttribute('aria-hidden', 'true');
+        window.removeEventListener('click', fermerModaleExterne);
+      } else if (e.target.closest(".modal").id == "modal2") {
+        modal2.style.display = "none";
+        modal2.setAttribute('aria-hidden', 'true');
+        window.removeEventListener('click', fermerModaleExterne);
+      }
+    });
+  })
 }
-//Fonction pour fermer la modal en dehors 
+
+//Fonction pour fermer la modal en dehors de la fenêtre modal
 function fermerModaleExterne(event) {
   event.preventDefault();
   // vérifie si le clic est en dehors de la modale
@@ -76,7 +68,7 @@ function afficherProjetsModale() {
     })
 }
 
-//Fonction pour crééer des éléments html(figure,img,span,i'trash') pour avoir la liste de projets
+//Fonction pour crééer des éléments html(figure,img,span,i'trash') pour avoir la liste des projets et supprimer un projet au clic sur la poubelle
 function displayWorksModal(projet) {
 
   const figure = document.createElement('figure');
@@ -97,43 +89,82 @@ function displayWorksModal(projet) {
   span.appendChild(trash)
   figure.appendChild(span);
   galleryModal.appendChild(figure);
+
+  // Supprimer un projet (pour la galerie modale et galerie)
+  trash.addEventListener('click', () => {
+    deleteWork(projectId);
+  });
 }
 
 /******** */
 //Fonction pour supprimer les travaux, projets
-// function deleteProjet() {
-//    // ajoute de l'évèment au clique de la poubelle pour supprimer le projet
-//   const trashIcon = document.querySelector(".fa-trash-can");
-//   trashIcon.forEach(trash => {
-//     trashIcon.addEventListener('click', (e) => {
-//       const projectId = trash.id;
-//       //fetch method delete pour les supprimer dans l'API
-//       fetchDelete(projectId, token)
-//       .then(() => {
-//         displayWorksModal();
-//         displayWorks();
-//       })
-//     })
-//   })
-// }
-
-// Fetch Delete
-// async function fetchDelete(projectId, token) {
-//   return fetch(`http://localhost:5678/api/works/${projectId}`, {
-//       method: 'DELETE',
-//       headers: {
-//           'Authorization': `Bearer ${token}`
-//       }
+//Supression des works grace a la méthode DELETE & au Token user depuis la poubelle de la modale
+//Objet de paramétrage pour requette DELETE avec token
+// const deleteWorkID = {
+//   method: "DELETE",
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//     "Content-Type": "application/json",
+//   },
+//   mode: "cors",
+//   credentials: "same-origin",
+// };
+// //Supéssion au click sur la poubelle et mise a jour modale et gallery principale
+// function deleteWork() {
+//   const trashs = document.querySelectorAll(".fa-trash-can")
+//   // console.log(trashs);
+//   trashs.forEach(trash => {
+//     trash.addEventListener("click", (e) => {
+//       const workID = trash.id;
+//       // console.log(trash);
+//       fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID).then(
+//         () => {
+//           displayWorksModal();
+//           displayWorks();
+//         }
+//       );
+//     });
 //   });
 // }
 
-// function afficherModal2() {
-//   //si modal disparait alors modal2 apparait
-//   // if (modal.style.display === "none" && modal.setAttribute('aria-hidden') === 'true') {
-//   modal2.style.display = "flex";
-//   modal2.removeAttribute('aria-hidden');
-//   // }
-// }
+// Fonction supprimer un projet
+function deleteWork(projectId) {
+
+  const token = localStorage.getItem("token");
+  // const elementDeleted = document.querySelector(`.fa-trash-can[data-project-id="${projectId}"]`);
+  // const portfolioDeleted = document.querySelector(`figure[data-project-id="${projectId}"]`);
+  // const galleryDeleted = elementDeleted.parentElement;
+
+  // récupérer les deux figures (de gallery et galleryModal) et les supprimer du DOM :
+  const figureGallery = document.querySelector('.gallery figure');
+  const figureGalleryModal = document.querySelector('.galleryModal figure');
+
+  fetchDelete(projectId, token)
+    .then(response => {
+      if (response.ok) {
+        // portfolioDeleted.remove();
+        // galleryDeleted.remove();
+        figureGallery.remove();
+        figureGalleryModal.remove();
+        console.log(`Le projet avec l'ID ${projectId} a été supprimé.`);
+      } else {
+        console.log(`Une erreur s'est produite lors de la suppression du projet avec l'ID ${projectId}.`);
+      }
+    })
+    .catch(error => {
+      console.log('Une erreur s\'est produite lors de la communication avec l\'API :', error);
+    });
+}
+
+// Fetch Delete
+function fetchDelete(projectId, token) {
+  return fetch(`http://localhost:5678/api/works/${projectId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+}
 
 //Fonction permettant de passer de la modal1(galerie photo) à la modal2(ajout photo)
 function modalNext() {
@@ -148,6 +179,14 @@ function modalNext() {
     // afficherModale2();
   })
 }
+
+// function afficherModal2() {
+//   //si modal disparait alors modal2 apparait
+//   // if (modal.style.display === "none" && modal.setAttribute('aria-hidden') === 'true') {
+//   modal2.style.display = "flex";
+//   modal2.removeAttribute('aria-hidden');
+//   // }
+// }
 
 //Fonction pour revenir sur la modal : galerie photo
 function backModalGallery() {
@@ -164,31 +203,116 @@ function backModalGallery() {
   });
 }
 
-// Fonction ajouter une nouvelle photo dans modal "Galerie photo"
-function addNewPhoto() {
-  //selectionne bouton ajouter une photo(modale2)
-  const btnAddPhoto = document.querySelector('label .btnAddPhoto')
-  //au click sur ce bouton je recupere fichier 'photo'
-  //  + previsualisation image de la photo 
-  btnAddPhoto.addEventListener('click', function() {
-    previewImg()
-  })
+const formAddWorks = document.querySelector("#formAddWorks");
+const fileInput = document.getElementById('fileInput');
+const previewImage = document.getElementById('previewImage');
+// const fileInputButton = document.querySelector('.btnAddPhoto');
+const inputFile = document.querySelector("#file");
+
+// Fonction pour choisir son image en local
+function choosePhoto(event) {
+  const file = event.target.files[0];
+
+  if (file && file.type.match('image.*')) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      previewImage.src = e.target.result;
+      previewImage.style.display = 'block';
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    alert('Veuillez sélectionner un fichier image valide (JPG ou PNG).');
+    previewImage.style.display = 'none';
+  }
 }
 
 // Fonction pour avoir un aperçu de l'image récupéré en local
-function previewImg() {}
+function previewImg() {
+  fileInput.addEventListener('change', choosePhoto);
+}
 
 //fonction du menu deroulant des categories(objet, appartement, restaurant)
 function selectFormCategories() {
-  // const formSelect = document.getElementById('categoryInput');
-  // const categories = fetch('http://localhost:5678/api/categories');
-  // // const categories = fetchCategories();
-  // categories.forEach(category => {
-  //     const option = document.createElement('option');
-  //     option.value = category.id;
-  //     option.textContent = category.name;
-  //     formSelect.appendChild(option);
-  // });
+  const formSelect = document.getElementById('categoryInput');
+  const categories = fetch('http://localhost:5678/api/categories');
+  // const categories = fetchCategories();
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category.id;
+    option.textContent = category.name;
+    formSelect.appendChild(option);
+  });
 }
+
+//Function d'ajout d'un nouveau projet en appuyant sur "valider"
+function addWorks() {
+  formAddWorks.addEventListener("submit", (e) => {
+    e.preventDefault();
+    // Récupération des Valeurs du Formulaire
+    const formData = new FormData(formAddWorks);
+    // fetch("http://localhost:5678/api/works", {
+    //   method: "POST",
+    //   body: formData,
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    fetchAddWorks()
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de l'envoi du fichier");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fichier envoyé avec succès :", data);
+        // displayWorksModal();
+        // displayWorksGallery();
+        displayWorksModal();
+        displayWorks();
+        formAddWorks.reset();
+        modal.style.display = "flex";
+        modal2.style.display = "none";
+        // modalPortfolio.style.display = "flex";
+        // modalAddWorks.style.display = "none";
+        previewImage.style.display = "none";
+      })
+      .catch((error) => {
+        console.error("Erreur :", error);
+      });
+  });
+}
+function fetchAddWorks() {
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
+const inputTitle = document.getElementById('title')
+const inputCategory = document.getElementById('categoryInput')
+const buttonValidForm = document.querySelector(".btnValider");
+
+// fontion qui vérifie si tout les inputs sont remplis
+function verifFormCompleted() {
+  // const buttonValidForm = document.querySelector(
+  //   ".container-button-add-work  button"
+  // );
+  formAddWorks.addEventListener("input", () => {
+    if (!inputTitle.value == "" && !inputFile.files[0] == "") {
+      buttonValidForm.classList.remove("button-add-work");
+      buttonValidForm.classList.add("buttonValidForm");
+    } else {
+      buttonValidForm.classList.remove("buttonValidForm");
+      buttonValidForm.classList.add("button-add-work");
+    }
+  });
+}
+
 
 

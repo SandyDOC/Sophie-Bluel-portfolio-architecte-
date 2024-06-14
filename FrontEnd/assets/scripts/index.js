@@ -15,19 +15,26 @@ const galleryModal = document.querySelector('.galleryModal');
 const modal = document.getElementById('modal');
 const modal2 = document.getElementById('modal2');
 
-// Gestion de l'événement load quand utilisateur connecté (mode édition)
+// Gestion de l'événement load quand utilisateur se connecte et est connecté (mode édition)
 document.addEventListener("DOMContentLoaded", function () {
+    //Changement d'affichage quand l'utilisateur se connecte
     displayMenuUserConnected();
-    if (isConnected())
-        //  && modal.getAttribute("aria-hidden") === "false" )
-    // || modal2.getAttribute("aria-hidden") === "false")
-    {
-        afficherModale();
+    // Quand l'utilisateur est connecté
+    if (isConnected()) {
+        // afficherModale();
         fermerModale();
-        // deleteProjet();
+
+        deleteWork();
+
         modalNext();
         backModalGallery();
+        
+        // initializeFileInput() 
+        previewImage()
         selectFormCategories();
+        // sendNewProject();
+        addWorks()
+        verifFormCompleted()
     }
 });
 
