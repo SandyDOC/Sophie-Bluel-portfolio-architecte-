@@ -1,9 +1,12 @@
 // const galleryModal = document.querySelector('.galleryModal');
+// const token = window.localStorage.getItem("token");
+// const inputCategory = document.getElementById('categoryInput')
+
 // const modal = document.getElementById('modal')
 // const modal2 = document.getElementById('modal2')
-// const token = window.localStorage.getItem("token");
 
-/* Fonction pour afficher de la Modal uniquement si connecté grace au click sur le bouton modifié*/
+
+/* Fonction pour afficher de la Modal uniquement si connecté grace au click sur le bouton modifier*/
 function afficherModale() {
   // récupère la modale à partir de son id
   // const modal = document.getElementById('modal');
@@ -12,8 +15,6 @@ function afficherModale() {
   modal.removeAttribute('aria-hidden')
   // on affiche la liste des projets de la modale
   afficherProjetsModale();
-  // on ajoute un évènement pour fermer la modale au clic de la croix
-  // fermerModale();
   // on ajoute un évènement pour fermer la modale au clic en dehors de celle-ci
   window.addEventListener('click', fermerModaleExterne);
 }
@@ -68,7 +69,7 @@ function afficherProjetsModale() {
     })
 }
 
-//Fonction pour crééer des éléments html(figure,img,span,i'trash') pour avoir la liste des projets et supprimer un projet au clic sur la poubelle
+//Fonction pour créer des éléments html(figure,img,span,i'trash') pour avoir la liste des projets et supprimer un projet au clic sur la poubelle
 function displayWorksModal(projet) {
 
   const figure = document.createElement('figure');
@@ -91,49 +92,16 @@ function displayWorksModal(projet) {
   galleryModal.appendChild(figure);
 
   // Supprimer un projet (pour la galerie modale et galerie)
+  const projectId = projet.id;
   trash.addEventListener('click', () => {
     deleteWork(projectId);
   });
 }
 
-/******** */
-//Fonction pour supprimer les travaux, projets
-//Supression des works grace a la méthode DELETE & au Token user depuis la poubelle de la modale
-//Objet de paramétrage pour requette DELETE avec token
-// const deleteWorkID = {
-//   method: "DELETE",
-//   headers: {
-//     Authorization: `Bearer ${token}`,
-//     "Content-Type": "application/json",
-//   },
-//   mode: "cors",
-//   credentials: "same-origin",
-// };
-// //Supéssion au click sur la poubelle et mise a jour modale et gallery principale
-// function deleteWork() {
-//   const trashs = document.querySelectorAll(".fa-trash-can")
-//   // console.log(trashs);
-//   trashs.forEach(trash => {
-//     trash.addEventListener("click", (e) => {
-//       const workID = trash.id;
-//       // console.log(trash);
-//       fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID).then(
-//         () => {
-//           displayWorksModal();
-//           displayWorks();
-//         }
-//       );
-//     });
-//   });
-// }
-
 // Fonction supprimer un projet
 function deleteWork(projectId) {
-
-  const token = localStorage.getItem("token");
-  // const elementDeleted = document.querySelector(`.fa-trash-can[data-project-id="${projectId}"]`);
-  // const portfolioDeleted = document.querySelector(`figure[data-project-id="${projectId}"]`);
-  // const galleryDeleted = elementDeleted.parentElement;
+  // const projectId = projet.id;
+  // const token = localStorage.getItem("token");
 
   // récupérer les deux figures (de gallery et galleryModal) et les supprimer du DOM :
   const figureGallery = document.querySelector('.gallery figure');
@@ -142,8 +110,6 @@ function deleteWork(projectId) {
   fetchDelete(projectId, token)
     .then(response => {
       if (response.ok) {
-        // portfolioDeleted.remove();
-        // galleryDeleted.remove();
         figureGallery.remove();
         figureGalleryModal.remove();
         console.log(`Le projet avec l'ID ${projectId} a été supprimé.`);
@@ -170,6 +136,7 @@ function fetchDelete(projectId, token) {
 function modalNext() {
   //selectionne le bouton ajouter une photo
   const btnAddPhoto = document.querySelector('.addPhoto')
+
   //au click sur le bouton "ajouter une photo" je passe à la modale2 et modale1 disparait
   btnAddPhoto.addEventListener('click', function () {
     modal.style.display = "none";
@@ -191,7 +158,6 @@ function modalNext() {
 //Fonction pour revenir sur la modal : galerie photo
 function backModalGallery() {
   /**selectionne arrow-left*/
-  // const arrowLeft = document.querySelector('a .arrowBack');
   const arrowLeft = document.querySelector('.modal2 .fa-arrow-left');
   //au click sur l'icone arrowLeft, je suis redirigé vers modal1 (modal2 disparait)
   arrowLeft.addEventListener('click', function () {
@@ -203,12 +169,7 @@ function backModalGallery() {
   });
 }
 
-const formAddWorks = document.querySelector("#formAddWorks");
-const fileInput = document.getElementById('fileInput');
 const previewImage = document.getElementById('previewImage');
-// const fileInputButton = document.querySelector('.btnAddPhoto');
-const inputFile = document.querySelector("#file");
-
 // Fonction pour choisir son image en local
 function choosePhoto(event) {
   const file = event.target.files[0];
@@ -228,38 +189,50 @@ function choosePhoto(event) {
   }
 }
 
+const fileInput = document.getElementById('fileInput');
 // Fonction pour avoir un aperçu de l'image récupéré en local
 function previewImg() {
   fileInput.addEventListener('change', choosePhoto);
 }
 
 //fonction du menu deroulant des categories(objet, appartement, restaurant)
-function selectFormCategories() {
-  const formSelect = document.getElementById('categoryInput');
-  const categories = fetch('http://localhost:5678/api/categories');
-  // const categories = fetchCategories();
-  categories.forEach(category => {
-    const option = document.createElement('option');
-    option.value = category.id;
-    option.textContent = category.name;
-    formSelect.appendChild(option);
-  });
-}
+// function selectFormCategories() {
+//   const formSelect = document.getElementById('categoryInput');
+//   // const categories = fetch('http://localhost:5678/api/categories');
+//   // const categories = fetchCategories();
+//   // console.log(categories)
+// //   const categories = [
+// //     { id: 1, name: 'Objets' },
+// //     { id: 2, name: 'Appartements' },
+// //     { id: 3, name: 'Hotels & restaurants' }
+// // ];
+//   categories.forEach(category => {
+//     const option = document.createElement('option');
+//     option.value = category.id;
+//     option.textContent = category.name;
+//     formSelect.appendChild(option);
+//   });
+// }
+
+const formAddWorks = document.querySelector("#formAddWorks");
+const submitter = document.querySelector("input[value=Valider]");
+// const formData = new FormData(formAddWorks, submitter);
 
 //Function d'ajout d'un nouveau projet en appuyant sur "valider"
-function addWorks() {
+function addWork() {
   formAddWorks.addEventListener("submit", (e) => {
     e.preventDefault();
     // Récupération des Valeurs du Formulaire
-    const formData = new FormData(formAddWorks);
-    // fetch("http://localhost:5678/api/works", {
-    //   method: "POST",
-    //   body: formData,
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    fetchAddWorks()
+    // const formData = new FormData(formAddWorks);
+    const formData = new FormData(formAddWorks, submitter);
+    fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    // fetchAddWorks()
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur lors de l'envoi du fichier");
@@ -267,16 +240,13 @@ function addWorks() {
         return response.json();
       })
       .then((data) => {
+        // une fois le then récupéré, ajouter une nouvelle figure dans la modale et dans la page d'accueil
         console.log("Fichier envoyé avec succès :", data);
-        // displayWorksModal();
-        // displayWorksGallery();
         displayWorksModal();
         displayWorks();
         formAddWorks.reset();
         modal.style.display = "flex";
         modal2.style.display = "none";
-        // modalPortfolio.style.display = "flex";
-        // modalAddWorks.style.display = "none";
         previewImage.style.display = "none";
       })
       .catch((error) => {
@@ -284,32 +254,28 @@ function addWorks() {
       });
   });
 }
-function fetchAddWorks() {
-  fetch("http://localhost:5678/api/works", {
-    method: "POST",
-    body: formData,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-}
+// function fetchAddWorks() {
+//   fetch("http://localhost:5678/api/works", {
+//     method: "POST",
+//     body: formData,
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+// }
 
 const inputTitle = document.getElementById('title')
-const inputCategory = document.getElementById('categoryInput')
+const inputFile = document.querySelector("#file");
 const buttonValidForm = document.querySelector(".btnValider");
-
-// fontion qui vérifie si tout les inputs sont remplis
+// fontion qui vérifie si tout les inputs sont remplis alors le bouton "Valider" devient vert
 function verifFormCompleted() {
-  // const buttonValidForm = document.querySelector(
-  //   ".container-button-add-work  button"
-  // );
   formAddWorks.addEventListener("input", () => {
     if (!inputTitle.value == "" && !inputFile.files[0] == "") {
-      buttonValidForm.classList.remove("button-add-work");
+      buttonValidForm.classList.remove("btnValider");
       buttonValidForm.classList.add("buttonValidForm");
     } else {
       buttonValidForm.classList.remove("buttonValidForm");
-      buttonValidForm.classList.add("button-add-work");
+      buttonValidForm.classList.add("btnValider");
     }
   });
 }

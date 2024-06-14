@@ -29,11 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
         modalNext();
         backModalGallery();
         
-        // initializeFileInput() 
-        previewImage()
-        selectFormCategories();
-        // sendNewProject();
-        addWorks()
+        previewImg();
+        // selectFormCategories();
+        addWork();
         verifFormCompleted()
     }
 });
