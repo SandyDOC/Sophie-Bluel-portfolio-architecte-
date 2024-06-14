@@ -84,7 +84,7 @@ function displayWorksModal(projet) {
   const span = document.createElement("span")
   const trash = document.createElement("i");
   trash.classList.add("fa-solid", "fa-trash-can");
-  trash.id = projet.id;
+  // trash.id = projet.id;
 
   figure.appendChild(img);
   span.appendChild(trash)
@@ -92,7 +92,7 @@ function displayWorksModal(projet) {
   galleryModal.appendChild(figure);
 
   // Supprimer un projet (pour la galerie modale et galerie)
-  const projectId = projet.id;
+  // const projectId = projet.id;
   trash.addEventListener('click', () => {
     deleteWork(projectId);
   });
@@ -101,7 +101,7 @@ function displayWorksModal(projet) {
 // Fonction supprimer un projet
 function deleteWork(projectId) {
   // const projectId = projet.id;
-  // const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   // récupérer les deux figures (de gallery et galleryModal) et les supprimer du DOM :
   const figureGallery = document.querySelector('.gallery figure');
@@ -169,23 +169,36 @@ function backModalGallery() {
   });
 }
 
-const previewImage = document.getElementById('previewImage');
 // Fonction pour choisir son image en local
 function choosePhoto(event) {
   const file = event.target.files[0];
+  const previewImage = document.getElementById('previewImage');
+  const imageIcon = document.querySelector('.containerAddPhoto .fa-image');
+  const addPhotoLabel = document.querySelector('.containerAddPhoto .labelFile');
+  const formatText = document.querySelector('.containerAddPhoto .txtFormatPhoto');
 
   if (file && file.type.match('image.*')) {
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onload = function (e) {
-      previewImage.src = e.target.result;
-      previewImage.style.display = 'block';
-    };
+      reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          previewImage.style.display = 'block';
 
-    reader.readAsDataURL(file);
+          // Masquer les éléments
+          imageIcon.style.display = 'none';
+          addPhotoLabel.style.display = 'none';
+          formatText.style.display = 'none';
+      };
+
+      reader.readAsDataURL(file);
   } else {
-    alert('Veuillez sélectionner un fichier image valide (JPG ou PNG).');
-    previewImage.style.display = 'none';
+      alert('Veuillez sélectionner un fichier image valide (JPG ou PNG).');
+      previewImage.style.display = 'none';
+
+      // Afficher les éléments au cas où le fichier n'est pas valide
+      imageIcon.style.display = 'block';
+      addPhotoLabel.style.display = 'block';
+      formatText.style.display = 'block';
   }
 }
 
@@ -196,23 +209,23 @@ function previewImg() {
 }
 
 //fonction du menu deroulant des categories(objet, appartement, restaurant)
-// function selectFormCategories() {
-//   const formSelect = document.getElementById('categoryInput');
-//   // const categories = fetch('http://localhost:5678/api/categories');
-//   // const categories = fetchCategories();
-//   // console.log(categories)
-// //   const categories = [
-// //     { id: 1, name: 'Objets' },
-// //     { id: 2, name: 'Appartements' },
-// //     { id: 3, name: 'Hotels & restaurants' }
-// // ];
-//   categories.forEach(category => {
-//     const option = document.createElement('option');
-//     option.value = category.id;
-//     option.textContent = category.name;
-//     formSelect.appendChild(option);
-//   });
-// }
+function selectFormCategories() {
+  const formSelect = document.getElementById('categoryInput');
+  const categories = fetch('http://localhost:5678/api/categories');
+  // const categories = fetchCategories();
+  // console.log(categories)
+//   const categories = [
+//     { id: 1, name: 'Objets' },
+//     { id: 2, name: 'Appartements' },
+//     { id: 3, name: 'Hotels & restaurants' }
+// ];
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category.id;
+    option.textContent = category.name;
+    formSelect.appendChild(option);
+  });
+}
 
 const formAddWorks = document.querySelector("#formAddWorks");
 const submitter = document.querySelector("input[value=Valider]");
