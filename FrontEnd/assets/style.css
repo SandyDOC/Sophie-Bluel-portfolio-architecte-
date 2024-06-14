@@ -463,13 +463,13 @@ footer nav ul {
   right: 35px;
   cursor: pointer;
 }
-/* .modal h3  */
 #titleModal {
   font-family: Work Sans;
   font-size: 26px;
   font-weight: 400;
-  /* padding-bottom: 40px; */
+  padding-bottom: 22px;
 }
+
 .galleryModal {
   margin-top: 46px;
   margin-bottom: 40px;
@@ -551,7 +551,8 @@ footer nav ul {
   color: #b9c5cc;
   padding: 7px;
 }
-.btnAddPhoto {
+/* .btnAddPhotoModal2  */
+.containerAddPhoto .labelFile{
   padding: 10px;
   font-weight: 500;
   cursor: pointer;
@@ -583,6 +584,7 @@ footer nav ul {
   left: 0;
   top: 0;
   opacity: 0;
+  cursor: pointer;
 }
 /* .modalAddWorks form .containerAddPhoto input {
   opacity: 0;

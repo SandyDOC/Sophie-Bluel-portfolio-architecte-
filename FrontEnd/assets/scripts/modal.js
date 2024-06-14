@@ -98,7 +98,7 @@ function displayWorksModal(projet) {
 }
 
 // Fonction supprimer un projet
-const idProject = projet.id;
+// const idProject = projet.id;
 function deleteProjet(idProject) {
   console.log("delete project")
   const token = localStorage.getItem("token");
@@ -180,53 +180,48 @@ function choosePhoto(event) {
   const formatText = document.querySelector('.containerAddPhoto .txtFormatPhoto');
 
   if (file && file.type.match('image.*')) {
-      const reader = new FileReader();
+    const reader = new FileReader();
 
-      reader.onload = function(e) {
-          previewImage.src = e.target.result;
-          previewImage.style.display = 'block';
+    reader.onload = function (e) {
+      previewImage.src = e.target.result;
+      previewImage.style.display = 'block';
 
-          // Masquer les éléments
-          imageIcon.style.display = 'none';
-          addPhotoLabel.style.display = 'none';
-          formatText.style.display = 'none';
-      };
+      // Masquer les éléments
+      imageIcon.style.display = 'none';
+      addPhotoLabel.style.display = 'none';
+      formatText.style.display = 'none';
+    };
 
-      reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
   } else {
-      alert('Veuillez sélectionner un fichier image valide (JPG ou PNG).');
-      previewImage.style.display = 'none';
+    alert('Veuillez sélectionner un fichier image valide (JPG ou PNG).');
+    previewImage.style.display = 'none';
 
-      // Afficher les éléments au cas où le fichier n'est pas valide
-      imageIcon.style.display = 'block';
-      addPhotoLabel.style.display = 'block';
-      formatText.style.display = 'block';
+    // Afficher les éléments au cas où le fichier n'est pas valide
+    imageIcon.style.display = 'block';
+    addPhotoLabel.style.display = 'block';
+    formatText.style.display = 'block';
   }
 }
 
-const fileInput = document.getElementById('fileInput');
 // Fonction pour avoir un aperçu de l'image récupéré en local
 function previewImg() {
+  const fileInput = document.getElementById('fileInput');
   fileInput.addEventListener('change', choosePhoto);
 }
 
 //fonction du menu deroulant des categories(objet, appartement, restaurant)
 function selectFormCategories() {
   const formSelect = document.getElementById('categoryInput');
-  const categories = fetch('http://localhost:5678/api/categories');
-  // const categories = fetchCategories();
-  // console.log(categories)
-//   const categories = [
-//     { id: 1, name: 'Objets' },
-//     { id: 2, name: 'Appartements' },
-//     { id: 3, name: 'Hotels & restaurants' }
-// ];
-  categories.forEach(category => {
-    const option = document.createElement('option');
-    option.value = category.id;
-    option.textContent = category.name;
-    formSelect.appendChild(option);
-  });
+  fetchCategories()
+    .then(categories => {
+      categories.forEach((category) => {
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.name;
+        formSelect.appendChild(option);
+      });
+    })
 }
 
 const formAddWorks = document.querySelector("#formAddWorks");
@@ -248,7 +243,7 @@ function addWork() {
         Authorization: `Bearer ${token}`,
       },
     })
-    // fetchAddWorks()
+      // fetchAddWorks()
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erreur lors de l'envoi du fichier");
@@ -258,6 +253,9 @@ function addWork() {
       .then((data) => {
         // une fois le then récupéré, ajouter une nouvelle figure dans la modale et dans la page d'accueil
         console.log("Fichier envoyé avec succès :", data);
+
+        // ???? ****si buttonValidForm est ".btnValider" pour l'ajout d'un nouveau projet(photo, titre, catégorie) alors addWork()
+
         displayWorksModal();
         displayWorks();
         formAddWorks.reset();
@@ -283,8 +281,10 @@ function addWork() {
 const inputTitle = document.getElementById('title')
 const inputFile = document.querySelector("#file");
 const buttonValidForm = document.querySelector(".btnValider");
-// fontion qui vérifie si tout les inputs sont remplis alors le bouton "Valider" devient vert
+// fonction qui vérifie si tout les inputs sont remplis alors le bouton "Valider" devient vert
 function verifFormCompleted() {
+  const formAddWorks = document.querySelector("#formAddWorks");
+
   formAddWorks.addEventListener("input", () => {
     if (!inputTitle.value == "" && !inputFile.files[0] == "") {
       buttonValidForm.classList.remove("btnValider");
