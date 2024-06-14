@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         backModalGallery();
         
         previewImg();
-        // selectFormCategories();
+        selectFormCategories();
         addWork();
         verifFormCompleted()
     }
