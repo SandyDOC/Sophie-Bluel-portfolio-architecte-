@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // afficherModale();
         fermerModale();
 
-        deleteWork(projectId);
+        deleteProjet(idProject);
 
         modalNext();
         backModalGallery();

@@ -85,34 +85,36 @@ function displayWorksModal(projet) {
   const trash = document.createElement("i");
   trash.classList.add("fa-solid", "fa-trash-can");
   // trash.id = projet.id;
+  // Supprimer un projet (pour la galerie modale et galerie)
+  trash.addEventListener('click', () => {
+    deleteProjet(projet.id);
+  });
 
   figure.appendChild(img);
   span.appendChild(trash)
   figure.appendChild(span);
   galleryModal.appendChild(figure);
 
-  // Supprimer un projet (pour la galerie modale et galerie)
-  // const projectId = projet.id;
-  trash.addEventListener('click', () => {
-    deleteWork(projectId);
-  });
 }
 
 // Fonction supprimer un projet
-function deleteWork(projectId) {
-  // const projectId = projet.id;
+const idProject = projet.id;
+function deleteProjet(idProject) {
+  console.log("delete project")
   const token = localStorage.getItem("token");
 
   // récupérer les deux figures (de gallery et galleryModal) et les supprimer du DOM :
   const figureGallery = document.querySelector('.gallery figure');
   const figureGalleryModal = document.querySelector('.galleryModal figure');
 
-  fetchDelete(projectId, token)
+  fetchDelete(idProject, token)
     .then(response => {
       if (response.ok) {
         figureGallery.remove();
         figureGalleryModal.remove();
-        console.log(`Le projet avec l'ID ${projectId} a été supprimé.`);
+        afficherProjetsModale();
+        displayWorks();
+        console.log(`Le projet avec l'ID ${idProject} a été supprimé.`);
       } else {
         console.log(`Une erreur s'est produite lors de la suppression du projet avec l'ID ${projectId}.`);
       }
@@ -123,8 +125,8 @@ function deleteWork(projectId) {
 }
 
 // Fetch Delete
-function fetchDelete(projectId, token) {
-  return fetch(`http://localhost:5678/api/works/${projectId}`, {
+function fetchDelete(idProject, token) {
+  return fetch(`http://localhost:5678/api/works/${idProject}`, {
     method: 'DELETE',
     headers: {
       'Authorization': `Bearer ${token}`
@@ -230,6 +232,7 @@ function selectFormCategories() {
 const formAddWorks = document.querySelector("#formAddWorks");
 const submitter = document.querySelector("input[value=Valider]");
 // const formData = new FormData(formAddWorks, submitter);
+const previewImage = document.getElementById('previewImage');
 
 //Function d'ajout d'un nouveau projet en appuyant sur "valider"
 function addWork() {
