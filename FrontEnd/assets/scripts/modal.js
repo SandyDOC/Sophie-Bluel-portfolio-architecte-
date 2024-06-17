@@ -100,14 +100,12 @@ function displayWorksModal(projet) {
 
 
 // Fonction supprimer un projet
-// const idProject = projet.id;
 function deleteProjet(idProject) {
   console.log("delete project")
   const token = localStorage.getItem("token");
 
   // récupérer les deux figures (de gallery et galleryModal) et les supprimer du DOM :
   // .gallery figure[data-id='1']
-  
   // `.gallery figure[data-id='${idProject}']`
   const figureGallery = document.querySelector(".gallery figure[data-id='"+idProject+"']");
   const figureGalleryModal = document.querySelector(".galleryModal figure[data-id='"+idProject+"']");
@@ -142,7 +140,6 @@ function fetchDelete(idProject, token) {
 function modalNext() {
   //selectionne le bouton ajouter une photo
   const btnAddPhoto = document.querySelector('.addPhoto')
-
   //au click sur le bouton "ajouter une photo" je passe à la modale2 et modale1 disparait
   btnAddPhoto.addEventListener('click', function () {
     modal.style.display = "none";
@@ -167,7 +164,6 @@ function backModalGallery() {
   const arrowLeft = document.querySelector('.modal2 .fa-arrow-left');
   //au click sur l'icone arrowLeft, je suis redirigé vers modal1 (modal2 disparait)
   arrowLeft.addEventListener('click', function () {
-    // console.log(arrowLeft,"back")
     modal2.style.display = "none";
     modal2.setAttribute('aria-hidden', 'true');
     modal.style.display = "flex";
@@ -283,14 +279,16 @@ function addWork() {
 // }
 
 const inputTitle = document.getElementById('title')
-const inputFile = document.querySelector("#file");
+// const inputFile = document.querySelector("#file");
 const buttonValidForm = document.querySelector(".btnValider");
 // fonction qui vérifie si tout les inputs sont remplis alors le bouton "Valider" devient vert
 function verifFormCompleted() {
   const formAddWorks = document.querySelector("#formAddWorks");
 
   formAddWorks.addEventListener("input", () => {
-    if (!inputTitle.value == "" && !inputFile.files[0] == "") {
+    if (!inputTitle.value == "" )
+      // && !inputFile.files[0] == "") 
+      {
       buttonValidForm.classList.remove("btnValider");
       buttonValidForm.classList.add("buttonValidForm");
     } else {

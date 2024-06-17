@@ -1,3 +1,4 @@
+/*** Exécution ou lancement des fonctionnalités de la gestion des projets (ou travaux) ***/
 /*** Gestion de la CONNEXION en tant qu'utilisateur */
 
 // Variables et sélecteurs
@@ -41,27 +42,20 @@ fetchCategories()
 
 // Gestion de l'événement load quand utilisateur se connecte et est connecté (mode édition)
 document.addEventListener("DOMContentLoaded", async function () {
-
-    // Variables et sélecteurs
-    
-
+    // connect();
     //Changement d'affichage quand l'utilisateur se connecte
     displayMenuUserConnected();
     // Quand l'utilisateur est connecté
     if (isConnected()) {
-        // afficherModale();
         fermerModale();
-
-       
-        // deleteProjet(idProject);
 
         modalNext();
         backModalGallery();
         
-        //previewImg();
-        //selectFormCategories();
-        //addWork();
-        //verifFormCompleted()
+        previewImg();
+        selectFormCategories();
+        addWork();
+        verifFormCompleted()
     }
 });
 

@@ -14,11 +14,10 @@
 	<script src="https://kit.fontawesome.com/8f2991717e.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 	<!-- liens JS -->
-	<script src="./assets/scripts/user.js" defer></script>
 	<script src="./assets/scripts/works.js" defer></script>
-	<script src="./assets/scripts/index.js" defer></script>
+	<script src="./assets/scripts/user.js" defer></script>
 	<script src="./assets/scripts/modal.js" defer></script>
-
+	<script src="./assets/scripts/script.js" defer></script>
 </head>
 
 <body>
@@ -39,10 +38,16 @@
 		<!----- Modal -->
 		<aside id="modal" class="modal" style="display:none;" aria-hidden="true" role="dialog"
 			aria-labelledby="titleModal">
+			
 			<!-- boite blanche dans laquelle on met les élements -->
 			<section class="modal-wrapper">
+				<!-- <input type='file' id="getFile"> -->
+
 				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
 				<h3 id="titleModal">Galerie photo</h3>
+				
+				<input type='file'>
+
 				<div class="galleryModal">
 					<!-- <figure>
 						<i class="fa-solid fa-trash-can"></i>
@@ -89,6 +94,7 @@
 				<input class="btn addPhoto" type="submit" value="Ajouter une photo">
 			</section>
 		</aside>
+
 		<!----- Modal2-->
 		<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal2"
 			style="display:none;">
@@ -96,13 +102,15 @@
 				<i class="arrowBack fa-solid fa-arrow-left fa-lg"></i>
 				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
 				<h3 id="titleModal2">Ajout photo</h3>
+
+				<input type='file'>
+
 				<form id="formAddWorks">
-						<input type='file' id="getFile" >
+
+					<!-- <input type='file' id="getFile"> -->
+
 					<div class="containerAddPhoto">
-
-
 						<i class="fa-regular fa-image"></i>
-
 						<label class="labelFile btnAddPhoto" for="fileInput">+ Ajouter photo</label>
 						<p class="txtFormatPhoto">jpg,png : 4mo max</p>
 						<input type="file" id="fileInput" accept="image/jpg, image/png" class="file-input" required>
@@ -112,7 +120,7 @@
 					<input class="inputBorder" type="text" name="title" id="title" required>
 					<label class="labelModal2" for="categoryInput">Catégorie</label>
 					<select class="inputBorder" id="categoryInput" name="category" required>
-						
+
 					</select>
 					<div class="line lineModal2"></div>
 					<div class="container-button-add-work ">
@@ -146,6 +154,8 @@
 		</section>
 		<section id="portfolio">
 			<div class="portfolio-text">
+				
+				<input type='file'>
 				<h2>Mes Projets</h2>
 
 				<!-- modifier -->
@@ -153,6 +163,7 @@
 					<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
 					<span>modifier</span>
 				</a>
+
 
 			</div>
 			<div id="filter-buttons"></div>

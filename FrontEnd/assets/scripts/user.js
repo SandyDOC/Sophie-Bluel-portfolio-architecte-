@@ -109,7 +109,7 @@ function selectModeEdition() {
   const modeEditOverlay = document.querySelector('.mode-edit-overlay');//mode édition
   modeEditOverlay.classList.remove('display-none');
 }
-//Fonction affichage lien "modifier"
+//Fonction affichage lien "modifier" et au clic affiche la modal
 function selectModifier() {
   const editModif = document.querySelector('.edit-modif');//modifier
   editModif.classList.remove('display-none');
