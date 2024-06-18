@@ -29,31 +29,46 @@ function displayWorks(idCategorie = 0) {
 
     for (let i = 0; i < filteredWorks.length; i++) {
         const projet = filteredWorks[i];
-
-        // Création des éléments de la galerie principale
-        const figure = document.createElement('figure');
-        figure.dataset.id = projet.id;
-
-        const img = document.createElement('img');
-        img.classList.add('sizeImg')
-        img.src = projet.imageUrl;
-        img.alt = projet.title;
-
-        const figcaption = document.createElement('figcaption');
-        figcaption.textContent = projet.title;
-
-        figure.appendChild(img);
-        figure.appendChild(figcaption);
-        gallery.appendChild(figure);
+        createWork(projet)
     }
 }
 
+/* affichage des works dans le dom */
+function displayWorksGallery() {
+    gallery.innerHTML = "";
+    fetchWorks()
+    .then((data) => {
+        // console.log(data);
+        data.forEach((projet) => {
+            createWork(projet)
+        });
+    });
+}
+
+//Fonction pour créer les éléments de la galerie principale 
+
+function createWork(projet) {
+    const figure = document.createElement('figure');
+    figure.dataset.id = projet.id;
+
+    const img = document.createElement('img');
+    img.classList.add('sizeImg')
+    img.src = projet.imageUrl;
+    img.alt = projet.title;
+
+    const figcaption = document.createElement('figcaption');
+    figcaption.textContent = projet.title;
+
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+    gallery.appendChild(figure);
+}
 
 // Fonction pour créer et afficher tous les boutons de catégories
 function displayCategories(categories) {
     // Réinitialise le conteneur des boutons de catégorie
     categoryButtonsContainer.innerHTML = "";
-    
+
     // Création du bouton "Tous"
     const btnAll = document.createElement("button");
     btnAll.classList.add("btn");
@@ -61,10 +76,10 @@ function displayCategories(categories) {
     btnAll.classList.add("btn_selected");
     btnAll.innerHTML = "Tous";
     btnAll.dataset.category = 0;
-    
+
     categoryButtonsContainer.appendChild(btnAll);
     btnAll.addEventListener('click', handleFilterButtonClick);
-    
+
     // Création des boutons de chaque catégorie
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
@@ -73,7 +88,7 @@ function displayCategories(categories) {
         button.classList.add("filters");
         button.innerHTML = category.name;
         button.dataset.category = category.id;
-        
+
         categoryButtonsContainer.appendChild(button);
         button.addEventListener('click', handleFilterButtonClick);
     }
@@ -82,7 +97,7 @@ function displayCategories(categories) {
 // Fonction pour ajouter la classe 'btn_selected' au bouton cliqué pour qu'il reste 'vert'
 function btnSelected(event) {
     const buttons = document.querySelectorAll(".filters");
-    
+
     for (let i = 0; i < buttons.length; i++) {
         const buttonSelect = buttons[i];
         if (buttonSelect === event.target) {
@@ -101,8 +116,8 @@ function handleFilterButtonClick(event) {
     displayWorks(Number(categoryId));
     btnSelected(event);
 }
-  
-  
-  
-  
+
+
+
+
 

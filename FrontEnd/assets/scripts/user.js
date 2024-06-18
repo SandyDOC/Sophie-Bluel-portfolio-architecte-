@@ -26,46 +26,55 @@ function connect() {
 
     // Vérifie les données du formulaire
     // if (checkDataSubmit(emailValid, passwordValid)){
-      // const isValid = checkDataSubmit(emailValid, passwordValid);
-      // if (!isValid) return;
-      
-      const userEmail = emailInput.value;
-      const userPassword = passwordInput.value;
-      const dataLogin = {
-        email: userEmail,
-        password: userPassword,
-      };
-  
-      const chargeUtile = JSON.stringify(dataLogin);
-      /****Envoi de la requête****/
-      fetch("http://localhost:5678/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: chargeUtile,
+    // const isValid = checkDataSubmit(emailValid, passwordValid);
+    // if (!isValid) return;
+
+    // const userEmail = emailInput.value;
+    // const userPassword = passwordInput.value;
+    // const dataLogin = {
+    //   email: userEmail,
+    //   password: userPassword,
+    // };
+    
+    // Crée une nouvelle instance de FormData avec le formulaire
+    const formData = new FormData(loginForm);
+
+    // Crée un objet pour les données de connexion
+    const dataLogin = {
+      email: formData.get('email'), // Récupère la valeur du champ 'email'
+      password: formData.get('password'), // Récupère la valeur du champ 'password'
+    };
+
+    const chargeUtile = JSON.stringify(dataLogin);
+    /****Envoi de la requête****/
+    fetch("http://localhost:5678/api/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: chargeUtile,
+    })
+      .then((response) => {
+        console.log(response)
+        if (!response.ok) {
+          // emailInput.style.border = "2px solid #FF0000";
+          // passwordInput.style.border = "2px solid #FF0000";
+          // throw new Error(afficherErreurConnexion(dataLogin));
+          throw new Error("Le mot de passe ou l'email que vous avez fourni est incorrect");
+        } else if (response.status === 401) {
+          throw new Error("Problème de connexion au serveur");
+        }
+        return response.json();
       })
-        .then((response) => {
-          console.log(response)
-          if (!response.ok) {
-            // emailInput.style.border = "2px solid #FF0000";
-            // passwordInput.style.border = "2px solid #FF0000";
-            // throw new Error(afficherErreurConnexion(dataLogin));
-            throw new Error("Le mot de passe ou l'email que vous avez fourni est incorrect");
-          } else if (response.status === 401) {
-            throw new Error("Problème de connexion au serveur");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Stocke le token dans le stockage local 
-          const token = data.token;
-          localStorage.setItem('token', token);
-          // Redirige vers la page d'accueil
-          window.location.href = 'index.html';
-        })
-        .catch((error) => {
-          afficherErreurConnexion(loginForm);
-          console.error("Une erreur est survenue : ", error);
-        });
+      .then((data) => {
+        // Stocke le token dans le stockage local 
+        const token = data.token;
+        localStorage.setItem('token', token);
+        // Redirige vers la page d'accueil
+        window.location.href = 'index.html';
+      })
+      .catch((error) => {
+        afficherErreurConnexion(loginForm);
+        console.error("Une erreur est survenue : ", error);
+      });
     // };
   });
 };

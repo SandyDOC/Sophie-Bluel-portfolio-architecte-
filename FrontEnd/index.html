@@ -38,15 +38,11 @@
 		<!----- Modal -->
 		<aside id="modal" class="modal" style="display:none;" aria-hidden="true" role="dialog"
 			aria-labelledby="titleModal">
-			
+
 			<!-- boite blanche dans laquelle on met les élements -->
 			<section class="modal-wrapper">
-				<!-- <input type='file' id="getFile"> -->
-
 				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
 				<h3 id="titleModal">Galerie photo</h3>
-				
-				<input type='file'>
 
 				<div class="galleryModal">
 					<!-- <figure>
@@ -102,14 +98,9 @@
 				<i class="arrowBack fa-solid fa-arrow-left fa-lg"></i>
 				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
 				<h3 id="titleModal2">Ajout photo</h3>
-
-				<input type='file'>
-
 				<form id="formAddWorks">
 
-					<!-- <input type='file' id="getFile"> -->
-
-					<div class="containerAddPhoto">
+			   <!-- <div class="containerAddPhoto">
 						<i class="fa-regular fa-image"></i>
 						<label class="labelFile btnAddPhoto" for="fileInput">+ Ajouter photo</label>
 						<p class="txtFormatPhoto">jpg,png : 4mo max</p>
@@ -117,15 +108,31 @@
 						<img id="previewImage" src="#" alt="Aperçu de l'image" style="display:none;">
 					</div>
 					<label class="labelModal2" for="title">Titre</label>
-					<input class="inputBorder" type="text" name="title" id="title" required>
+					<input type="text" class="inputBorder" name="title" id="title" required>
 					<label class="labelModal2" for="categoryInput">Catégorie</label>
 					<select class="inputBorder" id="categoryInput" name="category" required>
-
 					</select>
 					<div class="line lineModal2"></div>
 					<div class="container-button-add-work ">
 						<input class="btnValider" type="submit" value="Valider">
+					</div> -->
+					<div class="containerAddPhoto">
+						<i class="fa-regular fa-image"></i>
+						<label for="file" class="labelFile btnAddPhoto">+ Ajouter photo</label>
+						<p class="txtFormatPhoto">jpg,png : 4mo max</p>
+						<input type="file" name="image" id="file" class="file-input" accept="image/jpg, image/png" required>
+						<img id="previewImage" src="#" alt="Aperçu de l'image">
 					</div>
+					<label for="title" class="labelModal2">Titre</label>
+					<input type="text" name="title" id="title" class="inputBorder" required>
+					<label for="categoryInput" class="labelModal2">Catégorie</label>
+					<select id="categoryInput" name="category" class="inputBorder" required>
+					</select>
+					<!-- <div class="container-button-add-work "> -->
+						<input class="button-add-work btnValider" type="submit" value="Valider">
+						<!-- <button type="submit" class="button-add-work btnValider">Valider</button> -->
+					<!-- </div> -->
+
 				</form>
 			</section>
 		</aside>
@@ -154,8 +161,6 @@
 		</section>
 		<section id="portfolio">
 			<div class="portfolio-text">
-				
-				<input type='file'>
 				<h2>Mes Projets</h2>
 
 				<!-- modifier -->

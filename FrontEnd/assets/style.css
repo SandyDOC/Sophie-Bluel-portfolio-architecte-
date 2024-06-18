@@ -438,11 +438,11 @@ footer nav ul {
   box-sizing: border-box;
 } */
 .modal-wrapper {
-  max-width: 630px;
+  /* max-width: 630px; */
   /* height: 688px; */
   /* max-width: calc(100vw - 20px); */
-  /* max-height: calc(100vh - 20px); */
-  /* overflow: auto; */
+  max-height: calc(100vh - 20px);
+  overflow: auto;
   background-color: #fff;
   border-radius: 10px;
   position: absolute;
@@ -463,7 +463,7 @@ footer nav ul {
   right: 35px;
   cursor: pointer;
 }
-#titleModal, 
+#titleModal,
 #titleModal2 {
   font-family: Work Sans;
   font-size: 26px;
@@ -472,8 +472,8 @@ footer nav ul {
 }
 
 .galleryModal {
-  margin-top: 46px;
-  margin-bottom: 40px;
+  margin-top: 15px;
+  margin-bottom: 30px;
   display: grid;
   align-items: center;
   grid-template-columns: repeat(5, 1fr);
@@ -522,9 +522,9 @@ footer nav ul {
 }
 
 /** Modal2 = add photo*/
-.modal2 {
-  top: 4%;
-}
+/* .modal2 {
+  top:1%;
+} */
 .fa-arrow-left {
   position: absolute;
   top: 30px;
@@ -553,7 +553,7 @@ footer nav ul {
   padding: 7px;
 }
 /* .btnAddPhotoModal2  */
-.containerAddPhoto .labelFile{
+.containerAddPhoto .labelFile {
   padding: 10px;
   font-weight: 500;
   cursor: pointer;
@@ -571,10 +571,11 @@ footer nav ul {
 #previewImage {
   display: none; /* Masqué par défaut */
   max-width: 100%;
-  height: 181px;
+  height: 166px;
+  object-fit: cover;
   /* height: auto; */
   position: relative; /* S'assurer qu'il est au premier plan */
-  margin-top: 10px; /* Ajouter un peu d'espace par rapport aux autres éléments */
+  /* margin-top: 10px; Ajouter un peu d'espace par rapport aux autres éléments */
   border: 1px solid #ddd; /* Ajouter une bordure pour une meilleure visibilité */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajouter une ombre pour un meilleur contraste */
 }
@@ -602,7 +603,8 @@ footer nav ul {
   padding-top: 5px;
 }
 .inputBorder {
-  height: 51px;
+  height: 43px;
+  /* height: 51px; */
   margin-bottom: 23px;
 
   width: 420px;
@@ -632,7 +634,8 @@ footer nav ul {
   color: white;
   cursor: pointer;
 } */
- .buttonValidForm {
+.buttonValidForm {
   background-color: #1d6154;
   color: white;
- }
+  height: 36px;
+}

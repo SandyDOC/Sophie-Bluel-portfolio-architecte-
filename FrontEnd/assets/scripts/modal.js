@@ -9,7 +9,6 @@
 /* Fonction pour afficher de la Modal uniquement si connecté grace au click sur le bouton modifier*/
 function afficherModale() {
   // récupère la modale à partir de son id
-  // const modal = document.getElementById('modal');
   // change le style de l'élément pour pouvoir l'afficher
   modal.style.display = "flex";
   modal.removeAttribute('aria-hidden')
@@ -42,7 +41,6 @@ function fermerModale() {
 
 //Fonction pour fermer la modal en dehors de la fenêtre modal
 function fermerModaleExterne(event) {
-  event.preventDefault();
   // vérifie si le clic est en dehors de la modale
   if (event.target === modal) {
     modal.style.display = "none";
@@ -71,7 +69,6 @@ function afficherProjetsModale() {
 
 //Fonction pour créer des éléments html(figure,img,span,i'trash') pour avoir la liste des projets et supprimer un projet au clic sur la poubelle
 function displayWorksModal(projet) {
-
   const figure = document.createElement('figure');
   figure.dataset.id = projet.id;
 
@@ -84,7 +81,6 @@ function displayWorksModal(projet) {
   const span = document.createElement("span")
   const trash = document.createElement("i");
   trash.classList.add("fa-solid", "fa-trash-can");
-  // trash.id = projet.id;
   // Supprimer un projet (pour la galerie modale et galerie)
   trash.addEventListener('click', () => {
     deleteProjet(projet.id);
@@ -97,25 +93,22 @@ function displayWorksModal(projet) {
 
 }
 
-
-
 // Fonction supprimer un projet
 function deleteProjet(idProject) {
-  console.log("delete project")
+  // console.log("delete project")
   const token = localStorage.getItem("token");
 
   // récupérer les deux figures (de gallery et galleryModal) et les supprimer du DOM :
   // .gallery figure[data-id='1']
   // `.gallery figure[data-id='${idProject}']`
-  const figureGallery = document.querySelector(".gallery figure[data-id='"+idProject+"']");
-  const figureGalleryModal = document.querySelector(".galleryModal figure[data-id='"+idProject+"']");
+  const figureGallery = document.querySelector(".gallery figure[data-id='" + idProject + "']");
+  const figureGalleryModal = document.querySelector(".galleryModal figure[data-id='" + idProject + "']");
 
   fetchDelete(idProject, token)
     .then(response => {
       if (response.ok) {
         figureGallery.remove();
         figureGalleryModal.remove();
-        
         console.log(`Le projet avec l'ID ${idProject} a été supprimé.`);
       } else {
         console.log(`Une erreur s'est produite lors de la suppression du projet avec l'ID ${projectId}.`);
@@ -168,6 +161,7 @@ function backModalGallery() {
     modal2.setAttribute('aria-hidden', 'true');
     modal.style.display = "flex";
     modal.setAttribute('aria-hidden', 'false');
+    // inputFile.value = "";
   });
 }
 
@@ -206,7 +200,7 @@ function choosePhoto(event) {
 
 // Fonction pour avoir un aperçu de l'image récupéré en local
 function previewImg() {
-  const fileInput = document.getElementById('fileInput');
+  const fileInput = document.querySelector("#file");;
   fileInput.addEventListener('change', choosePhoto);
 }
 
@@ -224,18 +218,49 @@ function selectFormCategories() {
     })
 }
 
-const formAddWorks = document.querySelector("#formAddWorks");
-const submitter = document.querySelector("input[value=Valider]");
-// const formData = new FormData(formAddWorks, submitter);
-const previewImage = document.getElementById('previewImage');
+// const previewImage = document.getElementById('previewImage');
+// const fileInput = document.getElementById('fileInput');
+// const titleInput = document.getElementById('title');
+// const categoryInput = document.getElementById('categoryInput')
 
-//Function d'ajout d'un nouveau projet en appuyant sur "valider"
+
+//       // Vérifiez si la réponse est du JSON
+//         const contentType = response.headers.get("content-type");
+//         if (contentType && contentType.indexOf("application/json") !== -1) {
+  //           return response.json().then(data => {
+    //             if (!response.ok) {
+      //               console.error("Erreur du serveur:", data);
+      //               throw new Error(data.message || "Erreur lors de l'envoi du fichier");
+      //             }
+      //             return data;
+      //           });
+      //         } else {
+        //           // Si la réponse n'est pas du JSON, elle est probablement HTML
+        //           return response.text().then(html => {
+          //             console.error("Réponse HTML inattendue:", html);
+          //             throw new Error("Erreur inattendue du serveur");
+          //           });
+          //         }
+
+const formAddWorks = document.querySelector("#formAddWorks");
+const previewImage = document.getElementById("previewImage");
+
+//Fonction d'ajout d'un nouveau projet en appuyant sur "valider"
 function addWork() {
   formAddWorks.addEventListener("submit", (e) => {
     e.preventDefault();
     // Récupération des Valeurs du Formulaire
-    // const formData = new FormData(formAddWorks);
-    const formData = new FormData(formAddWorks, submitter);
+    const formData = new FormData(formAddWorks);
+
+    // formData.append('file', fileInput.files[0]);
+    // formData.append('title', titleInput.value);
+    // formData.append('category', categoryInput.value);
+
+    //    Log pour vérifier les données
+    // console.log('FormData:', formData);
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(`${key}:`, value);
+    // }
     fetch("http://localhost:5678/api/works", {
       method: "POST",
       body: formData,
@@ -243,21 +268,23 @@ function addWork() {
         Authorization: `Bearer ${token}`,
       },
     })
-      // fetchAddWorks()
       .then((response) => {
+        //Log de la réponse brute pour débogage
+        // console.log('Response:', response);
         if (!response.ok) {
-          throw new Error("Erreur lors de l'envoi du fichier");
+          //console.error("Erreur du serveur:", data);
+          throw new Error(data.message || "Erreur lors de l'envoi du fichier");
         }
         return response.json();
       })
       .then((data) => {
-        // une fois le then récupéré, ajouter une nouvelle figure dans la modale et dans la page d'accueil
         console.log("Fichier envoyé avec succès :", data);
 
-        // ???? ****si buttonValidForm est ".btnValider" pour l'ajout d'un nouveau projet(photo, titre, catégorie) alors addWork()
+        // Met à jour l'affichage des travaux dans la modale et sur la page d'accueil
+        afficherProjetsModale();
+        displayWorksGallery()
 
-        displayWorksModal();
-        displayWorks();
+        // Réinitialise le formulaire et met à jour l'affichage des modales
         formAddWorks.reset();
         modal.style.display = "flex";
         modal2.style.display = "none";
@@ -268,6 +295,7 @@ function addWork() {
       });
   });
 }
+
 // function fetchAddWorks() {
 //   fetch("http://localhost:5678/api/works", {
 //     method: "POST",
@@ -279,16 +307,14 @@ function addWork() {
 // }
 
 const inputTitle = document.getElementById('title')
-// const inputFile = document.querySelector("#file");
+const inputFile = document.querySelector("#file");
 const buttonValidForm = document.querySelector(".btnValider");
 // fonction qui vérifie si tout les inputs sont remplis alors le bouton "Valider" devient vert
 function verifFormCompleted() {
   const formAddWorks = document.querySelector("#formAddWorks");
 
   formAddWorks.addEventListener("input", () => {
-    if (!inputTitle.value == "" )
-      // && !inputFile.files[0] == "") 
-      {
+    if (!inputTitle.value == "" && !inputFile.files[0] == "") {
       buttonValidForm.classList.remove("btnValider");
       buttonValidForm.classList.add("buttonValidForm");
     } else {
