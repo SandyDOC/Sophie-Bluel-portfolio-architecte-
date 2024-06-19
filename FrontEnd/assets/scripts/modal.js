@@ -165,37 +165,47 @@ function backModalGallery() {
   });
 }
 
+const imageIcon = document.querySelector('.containerAddPhoto .fa-image');
+const addPhotoLabel = document.querySelector('.containerAddPhoto .labelFile');
+const formatText = document.querySelector('.containerAddPhoto .txtFormatPhoto');
+
 // Fonction pour choisir son image en local
 function choosePhoto(event) {
   const file = event.target.files[0];
   const previewImage = document.getElementById('previewImage');
-  const imageIcon = document.querySelector('.containerAddPhoto .fa-image');
-  const addPhotoLabel = document.querySelector('.containerAddPhoto .labelFile');
-  const formatText = document.querySelector('.containerAddPhoto .txtFormatPhoto');
+ 
 
   if (file && file.type.match('image.*')) {
     const reader = new FileReader();
 
     reader.onload = function (e) {
       previewImage.src = e.target.result;
-      previewImage.style.display = 'block';
-
-      // Masquer les éléments
-      imageIcon.style.display = 'none';
-      addPhotoLabel.style.display = 'none';
-      formatText.style.display = 'none';
+    
+      hideFieldFile();
+      
     };
 
     reader.readAsDataURL(file);
   } else {
     alert('Veuillez sélectionner un fichier image valide (JPG ou PNG).');
-    previewImage.style.display = 'none';
 
-    // Afficher les éléments au cas où le fichier n'est pas valide
-    imageIcon.style.display = 'block';
-    addPhotoLabel.style.display = 'block';
-    formatText.style.display = 'block';
+    displayFieldFile();
   }
+}
+
+function displayFieldFile() {
+  // Masquer les éléments
+  imageIcon.style.display = 'block';
+  addPhotoLabel.style.display = 'block';
+  formatText.style.display = 'block';
+  previewImage.style.display = 'none';
+}
+
+function hideFieldFile(){
+  imageIcon.style.display = 'none';
+  addPhotoLabel.style.display = 'none';
+  formatText.style.display = 'none';
+  previewImage.style.display = 'block';
 }
 
 // Fonction pour avoir un aperçu de l'image récupéré en local
@@ -286,9 +296,11 @@ function addWork() {
 
         // Réinitialise le formulaire et met à jour l'affichage des modales
         formAddWorks.reset();
+        // inputFile.value = "";
         modal.style.display = "flex";
         modal2.style.display = "none";
-        previewImage.style.display = "none";
+        previewImage.src = "#";
+        displayFieldFile();
       })
       .catch((error) => {
         console.error("Erreur :", error);
