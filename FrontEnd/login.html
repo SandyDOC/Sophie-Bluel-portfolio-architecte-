@@ -10,9 +10,9 @@
         rel="stylesheet">
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
-
     <title>Login</title>
 
+    <!-- Liens JS -->
     <script src="./assets/scripts/user.js" defer></script>
     <script src="./assets/scripts/login.js" defer></script>
 </head>
@@ -25,23 +25,20 @@
 				<li><a href="index.html#portfolio">projets</a></li>
 				<li><a href="index.html#contact">contact</a></li>
 				<li id="login-link" class="log">login</li>
-
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
 	</header>
+    
     <main>
         <div id="loginDiv" class="login">
             <h2>Log In</h2>
+            <!-- ** Formulaire de connexion(login) de l'utilisateur(user) ** -->
             <form id="loginForm" method="post" action="#">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required>
-                <span id="emailError" class="error-message display-none"></span>
-
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password" required>
-                <span id="passwordError" class="error-message display-none"></span>
-                
                 <input type="submit" class="btn" value="Se connecter">
             <a href="#" id="mdpOublie">Mot de passe oublié</a>
             </form>

@@ -10,10 +10,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
 	<meta name="description" content="">
-	<!-- kit fontawesome -->
+	<!-- Kit fontawesome -->
 	<script src="https://kit.fontawesome.com/8f2991717e.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
-	<!-- liens JS -->
+	<!-- Liens JS -->
 	<script src="./assets/scripts/works.js" defer></script>
 	<script src="./assets/scripts/user.js" defer></script>
 	<script src="./assets/scripts/modal.js" defer></script>
@@ -33,89 +33,31 @@
 			</ul>
 		</nav>
 	</header>
+
 	<main>
-
-		<!----- Modal -->
-		<aside id="modal" class="modal" style="display:none;" aria-hidden="true" role="dialog"
-			aria-labelledby="titleModal">
-
-			<!-- boite blanche dans laquelle on met les élements -->
-			<section class="modal-wrapper">
+		<!-- ** Modal "Galerie photo" ** -->
+		<aside id="modal" class="modal" style="display:none;" aria-hidden="true" aria-labelledby="titleModal">
+			<section class="modal-wrapper" role="dialog">
 				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
 				<h3 id="titleModal">Galerie photo</h3>
-
 				<div class="galleryModal">
 					<!-- <figure>
 						<i class="fa-solid fa-trash-can"></i>
 						<img class="modalImg" src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/restaurant-sushisen-londres.png"
-							alt="Restaurant Sushisen - Londres">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/la-balisiere.png"
-							alt="Villa “La Balisiere” - Port Louis">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/structures-thermopolis.png"
-							alt="Structures Thermopolis">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/le-coteau-cassis.png"
-							alt="Pavillon “Le coteau” - Cassis">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/appartement-paris-xviii.png"
-							alt="Appartement Paris XVIII">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-					</figure>
-					<figure>
-						<img class="modalImg" src="assets/images/hotel-first-arte-new-delhi.png"
-							alt="Hotel First Arte - New Delhi">
 					</figure> -->
 				</div>
 				<div class="line"></div>
-				<input class="btn addPhoto" type="submit" value="Ajouter une photo">
+				<input type="submit" value="Ajouter une photo" class="btn addPhoto">
 			</section>
 		</aside>
 
-		<!----- Modal2-->
-		<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titleModal2"
-			style="display:none;">
-			<section class="modal-wrapper modal2">
+		<!-- ** Modal "Ajout photo" ** -->
+		<aside id="modal2" class="modal" aria-hidden="true" aria-labelledby="titleModal2" style="display:none;">
+			<section class="modal-wrapper modal2" role="dialog">
 				<i class="arrowBack fa-solid fa-arrow-left fa-lg"></i>
 				<i class="close-modal-button fa-solid fa-xmark fa-lg"></i>
 				<h3 id="titleModal2">Ajout photo</h3>
 				<form id="formAddWorks">
-
-			   <!-- <div class="containerAddPhoto">
-						<i class="fa-regular fa-image"></i>
-						<label class="labelFile btnAddPhoto" for="fileInput">+ Ajouter photo</label>
-						<p class="txtFormatPhoto">jpg,png : 4mo max</p>
-						<input type="file" id="fileInput" accept="image/jpg, image/png" class="file-input" required>
-						<img id="previewImage" src="#" alt="Aperçu de l'image" style="display:none;">
-					</div>
-					<label class="labelModal2" for="title">Titre</label>
-					<input type="text" class="inputBorder" name="title" id="title" required>
-					<label class="labelModal2" for="categoryInput">Catégorie</label>
-					<select class="inputBorder" id="categoryInput" name="category" required>
-					</select>
-					<div class="line lineModal2"></div>
-					<div class="container-button-add-work ">
-						<input class="btnValider" type="submit" value="Valider">
-					</div> -->
 					<div class="containerAddPhoto">
 						<i class="fa-regular fa-image"></i>
 						<label for="file" class="labelFile btnAddPhoto">+ Ajouter photo</label>
@@ -127,17 +69,15 @@
 					<input type="text" name="title" id="title" class="inputBorder" required>
 					<label for="categoryInput" class="labelModal2">Catégorie</label>
 					<select id="categoryInput" name="category" class="inputBorder" required>
+						<option value="" label=" "></option>
 					</select>
-					<!-- <div class="container-button-add-work "> -->
-						<input class="button-add-work btnValider" type="submit" value="Valider">
-						<!-- <button type="submit" class="button-add-work btnValider">Valider</button> -->
-					<!-- </div> -->
-
+					<div class="line"></div>
+					<input class="btnValider" type="submit" value="Valider">
 				</form>
 			</section>
 		</aside>
 
-		<!-- Mode édition -->
+		<!-- ** "Mode édition" ** -->
 		<div class="mode-edit-overlay display-none">
 			<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
 			<p>Mode édition</p>
@@ -149,11 +89,14 @@
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
-				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à
+					la
 					livraison
 					finale du chantier.</p>
-				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
-					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les
+					matières et les
+					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le
+					suivi du
 					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
 					décorateur(trice)</p>
@@ -163,59 +106,20 @@
 			<div class="portfolio-text">
 				<h2>Mes Projets</h2>
 
-				<!-- modifier -->
+				<!-- ** Modifier ** -->
 				<a href="#modal" class="edit-modif display-none">
 					<i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
 					<span>modifier</span>
 				</a>
 
-
 			</div>
+			<!-- ** Boutons des catégories filtrées ** -->
 			<div id="filter-buttons"></div>
-
+			
+			<!-- ** Galerie des projets (figure>> img, figcaption) ** -->
 			<div class="gallery">
 				<!-- <figure>
 					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
-				</figure>
-				<figure>
-					<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 					<span><i class="fa-solid fa-trash-can" id="2" aria-hidden="true"></i></span>
 				</figure> -->
 			</div>
