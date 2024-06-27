@@ -18,12 +18,12 @@ async function fetchCategories() {
 function displayWorksGallery() {
     gallery.innerHTML = "";
     fetchWorks()
-    .then((data) => {
-        // console.log(data);
-        data.forEach((projet) => {
-            createWork(projet)
+        .then((data) => {
+            // console.log(data);
+            data.forEach((projet) => {
+                createWork(projet)
+            });
         });
-    });
 };
 
 //Fonction pour créer les éléments html de la galerie principale 
@@ -61,7 +61,7 @@ function displayWorksByCategories(idCategorie = 0) {
     for (let i = 0; i < filteredWorks.length; i++) {
         const projet = filteredWorks[i];
         createWork(projet);
-    }
+    };
 };
 
 // Fonction pour créer et afficher tous les boutons des catégories
@@ -98,11 +98,11 @@ function btnCategories(category) {
     categoryButtonsContainer.appendChild(button);
 
     button.addEventListener('click', handleFilterButtonClick);
-}
+};
 
 // Fonction pour ajouter la classe 'btn_selected' au bouton cliqué pour qu'il reste 'vert'(voir css)
 function btnSelected(event) {
-    // const buttons = document.querySelectorAll(".filters");
+    const buttons = document.querySelectorAll(".filters");
     for (let i = 0; i < buttons.length; i++) {
         const buttonSelect = buttons[i];
         if (buttonSelect === event.target) {
@@ -111,7 +111,7 @@ function btnSelected(event) {
             buttonSelect.classList.remove("btn_selected");
         }
     }
-}
+};
 
 // Fonction pour gérer l'événement 'click' des boutons de filtre
 function handleFilterButtonClick(event) {
@@ -120,7 +120,7 @@ function handleFilterButtonClick(event) {
     // Appelle de la fonction displayWorksByCategories avec l'ID de la catégorie converti en nombre ce qui affiche les travaux filtrés par la catégorie sélectionnée avec le bouton en 'vert'
     displayWorksByCategories(Number(categoryId));
     btnSelected(event);
-}
+};
 
 
 

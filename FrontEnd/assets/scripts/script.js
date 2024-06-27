@@ -66,6 +66,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         selectFormCategories();
         addWork();
         verifFormCompleted();
-    }
+    };
 });
 
